@@ -95,10 +95,10 @@ include_once("includes/bodyHead.inc");
           </div>
      </div>
 
-     <div class="row mt-5">
+     <!-- Cards -->
+     <!-- <div class="row mt-5">
           <div class="col-lg-6">
 
-               <!-- Default Card Example -->
                <div class="card shadow mb-4">
                     <div class="card-header">
                          Default Card Example
@@ -108,7 +108,6 @@ include_once("includes/bodyHead.inc");
                     </div>
                </div>
 
-               <!-- Basic Card Example -->
                <div class="card shadow mb-4">
                     <div class="card-header py-3">
                          <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
@@ -122,9 +121,7 @@ include_once("includes/bodyHead.inc");
 
           <div class="col-lg-6">
 
-               <!-- Dropdown Card Example -->
                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                          <h6 class="m-0 font-weight-bold text-primary">Dropdown Card Example</h6>
                          <div class="dropdown no-arrow">
@@ -140,19 +137,15 @@ include_once("includes/bodyHead.inc");
                               </div>
                          </div>
                     </div>
-                    <!-- Card Body -->
                     <div class="card-body">
                          This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
                     </div>
                </div>
 
-               <!-- Collapsable Card Example -->
                <div class="card shadow mb-4">
-                    <!-- Card Header - Accordion -->
                     <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
                          <h6 class="m-0 font-weight-bold text-primary">Collapsable Card Example</h6>
                     </a>
-                    <!-- Card Content - Collapse -->
                     <div class="collapse show" id="collapseCardExample">
                          <div class="card-body">
                               This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
@@ -160,7 +153,7 @@ include_once("includes/bodyHead.inc");
                     </div>
                </div>
           </div>
-     </div>
+     </div> -->
 </div>
 <!-- FIN PONER PAGINAS AQUI -->
 
