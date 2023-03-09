@@ -1,7 +1,7 @@
 <?php
      //parametros de conexion (opcionales)
      $servidor  = "localhost";
-     $basedatos = "hs_bg_repuestos";
+     $basedatos = "control_maquinaria";
      $usuario   = "root";
      $contra    = "";
 	

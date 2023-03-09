@@ -8,16 +8,13 @@
 // });
 
 $(document).ready(function () {
-     // $('#Tbl_Reporte_Repuestos').DataTable({
-     //      "lengthMenu": false
-     // });  
      $('#Tbl_Reporte_Compra').dataTable({
           retrieve: true,
           language: {
                "sLengthMenu": "Mostrar _MENU_ registros",
                "sSearch": "Buscar:",
                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-               "sEmpyTable": "No hay datos en esta tabla",
+               "sEmptyTable": "No hay datos en esta tabla",
                "oPaginate": {
                     "sFirst": "Primero",
                     "sLast": "Ultimo",

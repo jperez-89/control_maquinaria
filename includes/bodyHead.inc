@@ -1,29 +1,15 @@
 <body id="page-top">
-  <!-- Page Wrapper -->
+  <!-- body Head -->
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-danger sidebar toggled sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-warning sidebar sidebar-dark accordion" id="accordionSidebar">
       <a class="sidebar-brand shadow-lg d-flex align-items-center justify-content-center" href="dashboard.php">
-        <img class=" rounded-circle" src="img/icono.jpg" alt="Logo">
+        <img class="rounded-circle" src="img/icono2.jpg" alt="Logo">
         <div class="sidebar-brand-text mx-3">DASHBOARD</div>
       </a>
 
       <!-- Division - Linea blanca -->
       <hr class="sidebar-divider">
-
-      <!-- PLANILLA 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlanilla"
-          aria-expanded="true" aria-controls="collapsePlanilla">
-          <i class="fas fa-tasks"></i>
-          <span>Planilla</span>
-        </a>
-        <div id="collapsePlanilla" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">Registro de Planilla</a>
-          </div>
-        </div>
-      </li> -->
 
       <!-- MAQUINARIA-->
       <li class="nav-item">
@@ -34,26 +20,12 @@
         </a>
         <div id="collapseMaquinaria" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="RegistroMaq.php">Registro de Maquinaria</a>
+            <a class="collapse-item" href="maquinaria_registro.php">Registro de Maquinaria</a>
           </div>
         </div>
       </li>
 
-      <!-- MATERIAL QUEBRADOR 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMaterial"
-          aria-expanded="true" aria-controls="collapseMaterial">
-          <i class="fas fa-cheese"></i>
-          <span>Material</span>
-        </a>
-        <div id="collapseMaterial" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">Salidas de Material</a>
-          </div>
-        </div>
-      </li> -->
-
-      <!-- COMBUSTIBLE 
+      <!-- COMBUSTIBLE -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCombustible"
           aria-expanded="true" aria-controls="collapseCombustible">
@@ -63,40 +35,26 @@
         <div id="collapseCombustible" class="collapse" aria-labelledby="headingUtilities"
           data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-animation.html">Registro Facturas</a>
-            <a class="collapse-item" href="utilities-color.html">Solicitud</a>
-            <a class="collapse-item" href="utilities-border.html">Cierres</a>
+            <a class="collapse-item" href="combustible_ingreso.php">Ingreso de Combustible</a>
+            <a class="collapse-item" href="combustible_insumo">Insumo de Combustible</a>
+            <a class="collapse-item" href="combustible_reporte">Reportes</a>
           </div>
         </div>
-      </li> -->
-
-      <!-- PEDIDOS REPUESTOS Y MATERIALES 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePedidos"
-          aria-expanded="true" aria-controls="collapsePedidos">
-          <i class="fas fa-search-plus"></i>
-          <span>Pedidos</span>
-        </a>
-        <div id="collapsePedidos" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">Materiales - Randall V</a>
-            <a class="collapse-item" href="utilities-border.html">Repuestos - Pamela S</a>
-          </div>
-        </div>
-      </li> -->
+      </li> 
 
       <!-- BODEGA REPUESTOS Y MATERIALES -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBodega" aria-expanded="true"
           aria-controls="collapseBodega">
           <i class="fas fa-fw fa-wrench"></i>
-          <span>Bodega</span>
+          <span>Repuestos</span>
         </a>
         <div id="collapseBodega" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">            
-            <a class="collapse-item" href="RegistroRep.php">Registro de Repuestos</a>
-            <a class="collapse-item" href="SalidaRep.php">Salida de Repuestos</a>
-            <a class="collapse-item" href="ReportesRep.php">Reporte</a>            
+            <a class="collapse-item" href="repuestos_solicitud.php">Solicitud de Repuestos</a>
+            <a class="collapse-item" href="repuestos_ingresos.php">Registro de Repuestos</a>
+            <a class="collapse-item" href="repuestos_salidas.php">Salida de Repuestos</a>
+            <a class="collapse-item" href="repuestos_reportes.php">Reportes</a>            
           </div>
         </div>
       </li>

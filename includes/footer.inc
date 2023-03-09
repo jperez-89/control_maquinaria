@@ -10,19 +10,23 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Seguro desea salir?</h5>
-         <!-- <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button> -->
         </div>
-        <!-- <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div> -->
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
-          <a class="btn btn-primary" href="BackEnd/Salir.php">Si</a>
+          <a class="btn btn-primary" href="back/salir.php">Si</a>
         </div>
       </div>
     </div>
   </div>
 
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script> 
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="vendor/SweetAlert/sweetalert2.min.js"></script>
+
+    <script src="vendor/semantic/semantic.min.js"></script>
   <!-- Custom styles for this template -->
     <script src="js/sb-admin-2.min.js"></script> 
-</body>
