@@ -20,7 +20,7 @@ $('#BtnGuardarMaquina').on('click', function (e) {
                          mensaje('top', 1500, 'error', 'Datos no guardados')
                     }
                } else {
-                    erroConexion()
+                    msgErrorConexion()
                }
           });
      }
@@ -63,7 +63,7 @@ $('#BtnActualizarMaquina').on('click', function (e) {
                          mensaje('top', 1500, 'error', 'Datos No Guardados')
                     }
                } else {
-                    erroConexion()
+                    msgErrorConexion()
                }
           });
      }
@@ -92,7 +92,7 @@ function editarMaquinaria(id) {
                $('#CardRegistroMaquina').addClass('show');
 
           } else {
-               erroConexion()
+               msgErrorConexion()
           }
      });
 }
@@ -109,7 +109,7 @@ function eliminarMaquinaria(id) {
                     $('#Tbl_MaqRegistro').load('tables/tblMaquinaria.php');
                }
           } else {
-               erroConexion()
+               msgErrorConexion()
           }
      });
 }
@@ -126,48 +126,9 @@ function habilitarMaquinaria(id) {
                     $('#Tbl_MaqRegistro').load('tables/tblMaquinaria.php');
                }
           } else {
-               erroConexion()
+               msgErrorConexion()
           }
      });
-}
-
-function mensaje(position, timer, icon, title) {
-     const Toast = Swal.mixin({
-          toast: true,
-          position: position,
-          showConfirmButton: false,
-          timer: timer,
-     })
-
-     Toast.fire({
-          icon: icon,
-          title: title
-     });
-}
-
-function erroConexion() {
-     const Toast = Swal.mixin({
-          toast: true,
-          position: 'top',
-          showConfirmButton: false,
-          timer: 1500,
-     })
-
-     Toast.fire({
-          icon: 'error',
-          title: 'Error de Conexión con la BD'
-     });
-}
-
-function validaInputs(datos) {
-     let vacio = false;
-
-     for (let i = 0; i < datos.length; i++) {
-          if (datos[i] == '') {
-               vacio = true;
-          }
-     }
-     return vacio;
 }
 
 function LimpiarCampos() {
