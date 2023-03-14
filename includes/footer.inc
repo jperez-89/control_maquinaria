@@ -28,5 +28,7 @@
     <script src="vendor/SweetAlert/sweetalert2.min.js"></script>
 
     <script src="vendor/semantic/semantic.min.js"></script>
-  <!-- Custom styles for this template -->
+
     <script src="js/sb-admin-2.min.js"></script> 
+
+    <script src="js/utils.js"></script> 
