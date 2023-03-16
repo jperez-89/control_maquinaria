@@ -11959,6 +11959,10 @@ a:focus {
      justify-content: center
 }
 
+.border-top-warning {
+     border-top: .25rem solid #f6c23e !important
+}
+
 .border-left-primary {
      border-left: .25rem solid #4e73df !important
 }

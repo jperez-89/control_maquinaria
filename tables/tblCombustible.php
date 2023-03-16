@@ -33,7 +33,7 @@
                     <tbody>
                          <?php
                          require_once('../includes/conexion.inc');
-                         $query = "SELECT c.id, c.fecha, c.boleta, c.cantidadlts, i.saldolts, c.despachador, c.estado FROM combustible c INNER JOIN inventario_comb i ON i.idCombustible = c.id";
+                         $query = "SELECT c.id, c.fecha, c.boleta, c.cantidadlts, i.saldolts, d.nombre, c.estado FROM combustible c INNER JOIN inventario_comb i ON i.idCombustible = c.id INNER JOIN despachador d ON d.id = c.idDespachador";
                          $datos = mysqli_query($conex, $query);
 
                          while ($linea = mysqli_fetch_assoc($datos)) {
@@ -44,7 +44,7 @@
                                    <td> <?php echo $linea['boleta'] ?> </td>
                                    <td> <?php echo $linea['cantidadlts'] ?> </td>
                                    <td> <?php echo $linea['saldolts'] ?> </td>
-                                   <td> <?php echo $linea['despachador'] ?> </td>
+                                   <td> <?php echo $linea['nombre'] ?> </td>
                                    <td> <?php echo $linea['estado'] ? '<span class="badge badge-success">Activo</>' : '<span class="badge badge-danger">Inactivo</>' ?> </td>
                                    <td>
                                         <div class='p-0 m-0 text-center'>

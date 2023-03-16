@@ -1,3 +1,19 @@
+window.onload = function () {
+     this.FechaActual();
+}
+
+function FechaActual() {
+     var fecha = new Date(); //Fecha actual
+     var mes = fecha.getMonth() + 1; //obteniendo mes
+     var dia = fecha.getDate(); //obteniendo dia
+     var anho = fecha.getFullYear(); //obteniendo año
+     if (dia < 10)
+          dia = '0' + dia; //agrega cero si el menor de 10
+     if (mes < 10)
+          mes = '0' + mes //agrega cero si el menor de 10
+     $('#Fecha').val( anho + "-" + mes + "-" + dia);
+}
+
 function mensaje(position, timer, icon, title) {
     const Toast = Swal.mixin({
          toast: true,
@@ -13,15 +29,29 @@ function mensaje(position, timer, icon, title) {
 }
 
 function validaInputs(datos) {
-     let vacio = false;
-
+     // console.log(datos);
+     let vacio;
      for (let i = 0; i < datos.length; i++) {
-          if (datos[i] == '') {
+          if (datos[i] == '' || datos[i] == 0) {
                vacio = true;
+          } else {
+               vacio = false;
           }
      }
      return vacio;
 }
+
+function iniciarArray(array) {
+     array.splice(0, array.length);
+}
+
+function msgError(title, text) { 
+     Swal.fire({
+          // icon: 'error',
+          title: title,
+          text: text,
+        });
+ }
 
 function msgErrorConexion() {
      const Toast = Swal.mixin({

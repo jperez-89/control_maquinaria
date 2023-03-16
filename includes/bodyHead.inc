@@ -35,9 +35,10 @@
         <div id="collapseCombustible" class="collapse" aria-labelledby="headingUtilities"
           data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="combustible_ingreso.php">Ingreso de Combustible</a>
-            <a class="collapse-item" href="combustible_insumo">Insumo de Combustible</a>
-            <a class="collapse-item" href="combustible_reporte">Reportes</a>
+            <a class="collapse-item" href="combustible_despachadores.php">Despachadores</a>
+            <a class="collapse-item" href="combustible_ingreso.php">Ingresos</a>
+            <a class="collapse-item" href="combustible_insumo.php">Insumos</a>
+            <a class="collapse-item" href="combustible_reportes.php">Reportes</a>
           </div>
         </div>
       </li> 
@@ -50,11 +51,11 @@
           <span>Repuestos</span>
         </a>
         <div id="collapseBodega" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">            
+          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="repuestos_solicitud.php">Solicitud de Repuestos</a>
             <a class="collapse-item" href="repuestos_ingresos.php">Registro de Repuestos</a>
             <a class="collapse-item" href="repuestos_salidas.php">Salida de Repuestos</a>
-            <a class="collapse-item" href="repuestos_reportes.php">Reportes</a>            
+            <a class="collapse-item" href="repuestos_reportes.php">Reportes</a>
           </div>
         </div>
       </li>

@@ -15,15 +15,18 @@
           }
      });
 </script>
+
 <div class="table-responsive">
      <table id="Tbl_ModalMaquinaria" class="table table-hover table-sm">
           <thead>
                <tr>
                     <th></th>
+                    <th>Id</th>
                     <th>Código</th>
                     <th>Descripción</th>
                     <th>Marca</th>
                     <th>Modelo</th>
+                    <th>Estado</th>
                </tr>
           </thead>
           <?php include_once('../includes/conexion.inc'); ?>
@@ -31,19 +34,23 @@
           if (!$conex) {
                echo 'NoConex';
           } else {
-               $query = "SELECT maq.codMaquina, maq.Descripcion, maq.Marca, maq.Modelo FROM Maquinaria as maq;";
+               $btn2 = '<button disabled id="BtnAgregarMaquina" data-dismiss="modal" title="Agregar" class="btn btn-primary btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
+
+               $query = "SELECT Id, Codigo, Descripcion, Marca, Modelo, Estado FROM maquinaria";
                $result = mysqli_query($conex, $query);
-               $btn1 = '<button id="BtnAgregarMaquina" data-dismiss="modal" title="Agregar" class="btn btn-primary btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
+               $btn1 = '<button id="BtnAgregarMaquina" data-dismiss="modal" title="Agregar" class="btn btn-warning btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
 
                if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                         ?>
+          ?>
                          <tr>
-                              <td><?php echo $btn1 ?></td>
-                              <td><?php echo $row['codMaquina']; ?></td>
+                              <td><?php echo $retVal = ($row['Estado']) ? $btn1 : $btn2; ?></td>
+                              <td><?php echo $row['Id']; ?></td>
+                              <td><?php echo $row['Codigo']; ?></td>
                               <td><?php echo $row['Descripcion']; ?></td>
                               <td><?php echo $row['Marca']; ?></td>
                               <td><?php echo $row['Modelo']; ?></td>
+                              <td><?php echo $status = ($row['Estado']) ? '<span class="badge badge-success">Activo</>' : '<span class="badge badge-danger">Inactivo</>' ?> </td>
                          </tr>
           <?php
                     }

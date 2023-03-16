@@ -43,8 +43,6 @@ if (!$conex) {
 
                $query = "UPDATE maquinaria SET Estado = 0 WHERE Id = $Codigo";
 
-               var_dump($query);
-
                if (mysqli_query($conex, $query)) {
                     $repuesta = true;
                }
@@ -55,8 +53,6 @@ if (!$conex) {
                $Codigo = trim(strtoupper($datos[1]));
 
                $query = "UPDATE maquinaria SET Estado = 1 WHERE Id = $Codigo";
-
-               var_dump($query);
 
                if (mysqli_query($conex, $query)) {
                     $repuesta = true;

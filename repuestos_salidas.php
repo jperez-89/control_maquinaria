@@ -4,7 +4,6 @@
 <head>
      <title>Salidas de Repuestos</title>
      <?php include_once("includes/head.inc"); ?>
-     <script src="js/RepuestosSalida.js"></script>
 </head>
 <?php include_once("includes/bodyHead.inc"); ?>
 <!-- PONER PAGINAS AQUI -->
@@ -169,16 +168,17 @@
 </div>
 <!-- FIN PONER PAGINAS AQUI -->
 
-<script type="text/javascript">
-     $(document).ready(function() {
-          $('#Tbl_ModalRepSalidas').load('Tablas/Tbl_ModalRepSalidas.php');
-          $('#Tbl_ModalMaqSalidas').load('Tablas/Tbl_ModalMaqSalidas.php');
-     });
-</script>
-
 <?php
 include_once("includes/bodyFooter.inc");
 include_once("includes/footer.inc");
 ?>
 
+<script src="js/RepuestosSalida.js"></script>
+
+<script type="text/javascript">
+     $(document).ready(function() {
+          $('#Tbl_ModalRepSalidas').load('tables/Tbl_ModalRepSalidas.php');
+          // $('#Tbl_ModalMaqSalidas').load('Tablas/Tbl_ModalMaqSalidas.php');
+     });
+</script>
 </html>

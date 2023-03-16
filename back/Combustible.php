@@ -14,9 +14,9 @@ if (!$conex) {
                $fecha = trim($datos[1]);
                $boleta = trim($datos[2]);
                $cantidadlts = trim($datos[3]);
-               $despachador = trim($datos[4]);
+               $idDespachador = trim($datos[4]);
 
-               $query = "INSERT INTO combustible (fecha, boleta, cantidadlts, despachador, estado) VALUES ('" . $fecha . "', '" . $boleta . "', " . $cantidadlts . ", '" . $despachador . "', 1)";
+               $query = "INSERT INTO combustible (fecha, boleta, cantidadlts, idDespachador, estado) VALUES ('" . $fecha . "', '" . $boleta . "', " . $cantidadlts . ", '" . $idDespachador . "', 1)";
 
                if (mysqli_query($conex, $query)) {
                     $id = mysqli_insert_id($conex);
