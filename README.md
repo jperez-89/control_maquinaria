@@ -1,4 +1,5 @@
-Proyecto realizado utilizando plantilla sb-admin-2, PHP, javascript, jquery, semantic y SweetAlert, a manera personal, para mejoramiento del control de ingreso y salida de repuestos de maquinaria, así como los reportes necesarios de inventario.
+**Control inventario de maquinaria y repuestos, así como los ingresos e insumos de repuestos de maquinaria y combustible. Cuenta con reportes de ingreso, insumos e inventarios.** 
+**Este proyecto utiliza la plantilla sb-admin-2, PHP, javascript, jquery, semantic y SweetAlert.**
 
 Login
 ![Login](https://github.com/jperez-89/hsolis/blob/master/img/login.PNG?raw=true "Login")
