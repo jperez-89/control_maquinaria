@@ -1,232 +1,224 @@
-var Tbl_ModalMaquinaria = null, tabla = null, Tbl_ModalClientes = null, cfilas = 0, nfila, fila, FilaModalRepuestos, tbl_ModalRepuestos = null;
-
-// LIMPIA LOS CAMPOS TIPO TEXTO
-function LimpiarCampos() {
-     $("#txtMaquina").val('');
-     $("#txtCantidad").val('');
-     $("#txtCodigo").val('');
-     $("#txtDescripcion").val('');
-     $("#txtResponsable").val('');
-}
-
-// CONSULTA EXISTENCIA Y SEGUN AGREGA LA LINEA DEL REPUESTO A LA TABLA
-$(document).on('click', '#BtnAgregarSalida', function (e) {
-     e.preventDefault();
-     var Codigo = $("#txtCodigo").val();
-     var CantidadSalida = $("#txtCantidad").val();
-     if (Codigo != "") {
-          // AJAX QUE CONSULTA LA EXISTENCIA DEL REPUESTO, SI NO HAY ENVIA UNA ALERTA
-          $.post('BackEnd/ConsultaExistencia.php', { Codigo }, function (CantidadStock) {
-               if (Number(CantidadStock) < Number(CantidadSalida)) {
-                    Swal.fire({
-                         position: 'center',
-                         type: 'warning',
-                         title: 'No hay repuesto en stock',
-                         showConfirmButton: false,
-                         timer: 1700
-                    });
-                    Codigo = '';
-                    CantidadSalida = 0;
-               }
-               else {
-                    tabla = $('#Tbl_Salidas').dataTable({
-                         retrieve: true,
-                         paging: false,
-                         searching: false,
-                         language: {
-                              "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros"
-                         }
-                    });
-                    tabla.fnAddData([
-                         $("#txtFecha").val(),
-                         $("#txtCodigo").val(),
-                         $("#txtDescripcion").val(),
-                         $("#txtCantidad").val(),
-                         $("#txtMaquina").val(),
-                         $("#txtResponsable").val(),
-                         '<div class="ui buttons">'
-                         + '<button class="ui vk button" id="EditarLinea" title="Editar Linea"><i class="fa fa-edit"></i></button>'
-                         + '<div class="or"></div>'
-                         + '<button class="ui google plus button" id="EliminarLinea" title="Eliminar Linea"><i class="fa fa-trash"></i></button>'
-                         + '</div>'
-                    ]);
-                    LimpiarCampos();                    
-               }
-          });
-     }
-     else {
-          Swal.fire({
-               title: 'Debe agregar un producto',
-               type: 'error',
-               confirmButtonColor: '#3085d6',
-               cancelButtonColor: '#d33',
-               confirmButtonText: 'Ok',
-          });
-     }
-});
-
-// EDITA FILA DE LA TABLA
-$(document).on('click', '#EditarLinea', function (e) {
-     e.preventDefault();
-     // obtener la fila a editar
-     filaEditar = $(this).closest("tr").get(0);
-     // De la tabla obtiene los datos de esa fila 
-     data = tabla.fnGetData(filaEditar._DT_RowIndex);
-     // Imprime la posicion 1 del array, o sea, el Codigo del Producto
-     $("#txtFecha").val(data[0]);
-     $("#txtCodigo").val(data[1]);
-     $("#txtDescripcion").val(data[2]);
-     $("#txtCantidad").val(data[3]);
-     $("#txtMaquina").val(data[4]);
-     $("#txtResponsable").val(data[5]);
-
-     document.getElementById('BtnAgregarSalida').style.display = 'none';
-     document.getElementById('BtnActualizarSalida').style.display = 'block';
-});
-
-// ACTUALIZA LA LINEA SELECCIONADA
-$(document).on('click', '#BtnActualizarSalida', function (e) {
-     e.preventDefault();
-     // OBTENER LA FILA SELECCIONADA
-     nFila = filaEditar._DT_RowIndex;
-     // SE ACTUALIZAN LOS CAMPOS EN LA TABLA
-     tabla.fnUpdate($("#txtFecha").val(), nFila, 0, 0, false);
-     tabla.fnUpdate($("#txtCodigo").val(), nFila, 1, 0, false);
-     tabla.fnUpdate($("#txtDescripcion").val(), nFila, 2, 0, false);
-     tabla.fnUpdate($("#txtCantidad").val(), nFila, 3, 0, false);
-     tabla.fnUpdate($("#txtMaquina").val(), nFila, 4, 0, false);
-     tabla.fnUpdate($("#txtResponsable").val(), nFila, 5, 0, false);
-     /* Orden de los campos Dato, nfila, ncolumna, 0, false */
-
-     LimpiarCampos();
-     document.getElementById('BtnAgregarSalida').style.display = 'block';
-     document.getElementById('BtnActualizarSalida').style.display = 'none';
-});
-
-// ELIMINA FILA DE LA TABLA
-$(document).on('click', '#EliminarLinea', function (e) {
-     e.preventDefault();
-     Swal.fire({
-          title: 'Seguro quiere eliminar ésta linea?',
-          type: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Si',
-          cancelButtonText: 'No'
-     }).then((result) => {
-          if (result.value) {
-               var row = $(this).closest("tr").get(0);
-               tabla.fnDeleteRow(tabla.fnGetPosition(row));
-               cfilas -= 1;
-               if (cfilas == 0) {
-                    tabla = null;
-               }
+Tbl_SalidaRepuesto = $('#Tbl_SalidaRepuesto').dataTable({
+     retrieve: true,
+     "language": {
+          "sProcessing": "Procesando...",
+          "sLengthMenu": "Mostrar _MENU_ registros",
+          "sZeroRecords": "No se encontraron resultados",
+          "sEmptyTable": "Ningún dato disponible en esta tabla",
+          "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix": "",
+          "sSearch": "Buscar:",
+          "sUrl": "",
+          "sInfoThousands": ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+               "sFirst": "Primero",
+               "sLast": "Último",
+               "sNext": "Siguiente",
+               "sPrevious": "Anterior"
+          },
+          "oAria": {
+               "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+               "sSortDescending": ": Activar para ordenar la columna de manera descendente"
           }
-     })
+     }
 });
 
-// BORRA TODA LA INFO DE LA PANTALLA
-$(document).on('click', '#btnCancelarSalida', function (e) {
+$('#BtnModalRepuesto').click(function (e) {
      e.preventDefault();
-     LimpiarCampos();
-     tabla.fnClearTable();
-     cfilas = 0;
-     document.getElementById('BtnAgregarSalida').style.display = 'block';
-     document.getElementById('BtnActualizarSalida').style.display = 'none';
+     $('#tblModalRepuestos').load('tables/Tbl_ModalRepuestos.php');
 });
 
-// GUARDAR INFORMACION
-$(document).on('click', '#btnGuardarSalida', function (e) {
-     if (tabla != null) {
-          var Salidas = new Array();
-          $('#Tbl_Salidas tbody tr').each(function () {
-               var Fecha = $(this).find('td').eq(0).text();
-               var Codigo = $(this).find('td').eq(1).text();
-               var Descripcion = $(this).find('td').eq(2).text();
-               var Cantidad = $(this).find('td').eq(3).text();
-               var Maquina = $(this).find('td').eq(4).text();
-               var Responsable = $(this).find('td').eq(5).text();
-
-               fila = new Array(
-                    Fecha, Codigo, Descripcion, Cantidad, Maquina, Responsable
-               );
-               Salidas.push(fila);
-          });
-
-          $.ajax({
-               async: false,
-               type: "POST",
-               url: "BackEnd/SalidaRepuestos.php",
-               data: { Salidas: Salidas },
-               success: function (Correcto) {
-                    e.preventDefault();
-                    if (Correcto != 'NoConex') { //VALIDA QUE HAYA CONEXION CON LA BD
-                         if (Correcto > 0) {
-                              Swal.fire({
-                                   position: 'center',
-                                   type: 'success',
-                                   title: 'Datos Guardados',
-                                   showConfirmButton: false,
-                                   timer: 1500
-                              });
-                              setTimeout("location.href='SalidaRep.php'", 1501);
-                         } else {
-                              Swal.fire({
-                                   position: 'center',
-                                   type: 'error',
-                                   title: 'Datos No Guardados' + Correcto,
-                                   showConfirmButton: false,
-                                   timer: 1500
-                              });
-                         }
-                    } else {
-                         Swal.fire({
-                              position: 'center',
-                              type: 'error',
-                              title: 'Error de Conexión con la BD',
-                              showConfirmButton: false,
-                              timer: 1500
-                         });
-                    }
-               }
-          })
-     }
-     else {
-          Swal.fire({
-               position: 'center',
-               type: 'error',
-               title: 'No hay datos para guardar',
-               showConfirmButton: false,
-               timer: 1500
-          });
-     }
+$('#BtnModalMaquinaria').click(function (e) {
+     e.preventDefault();
+     $('#tblModalMaquinaria').load('tables/Tbl_ModalMaquinaria.php');
 });
 
-// BUSCA EL REPUESTO Y LO AGREGA AL CAMPO
+$('#BtnModalResponsable').click(function (e) {
+     e.preventDefault();
+     $('#ModalRespo').load('tables/Tbl_ModalDespachadores.php');
+});
+
 $(document).on('click', '#BtnAgregarRepuesto', function (e) {
      e.preventDefault();
-        // Boton - TR    -  TD
      r = $(this).parent().parent()[0];
-     // De la tabla obtiene los datos de la fila seleccionada 
      FilaModalRepuestos = tbl_ModalRepuestos.fnGetData(r);
 
-     // PASA LOS DATOS A LOS INPUT DEL "FORMULARIO"
-     $("#txtCodigo").val(FilaModalRepuestos[1]);
-     $("#txtDescripcion").val(FilaModalRepuestos[2]);
-     
-     // RECARGA EL MODAL EN CASO DE QUE SE USE EL BUSCADOR DE LA TABLA
-     $('#Tbl_ModalRepSalidas').load('Tablas/Tbl_ModalRepSalidas.php');
+     $("#idCodRepuesto").val(FilaModalRepuestos[1]);
+     $("#codRepuesto").val(FilaModalRepuestos[2]);
+     $("#Cantidad").focus();
 });
 
-// BUSCA EL LA MAQUINA Y LO AGREGA AL CAMPO
 $(document).on('click', '#BtnAgregarMaquina', function (e) {
      e.preventDefault();
-     // Boton - TR    -  TD
-     var r = $(this).parent().parent()[0];
-     // De la tabla obtiene los datos de esa fila 
-     var FilaModalMaquinaria = Tbl_ModalMaquinaria.fnGetData(r);
+     r = $(this).parent().parent()[0];
+     fila = Tbl_ModalMaquinaria.fnGetData(r);
 
-     $("#txtMaquina").val(FilaModalMaquinaria[1]);
-     $('#Tbl_ModalMaqSalidas').load('Tablas/Tbl_ModalMaqSalidas.php');
+     $("#idMaquina").val(fila[1]);
+     $("#Maquina").val(fila[2]);
 });
+
+$(document).on('click', '#BtnAgregarDespachador', function (e) {
+     e.preventDefault();
+     fila = $(this).parent().parent()[0];
+     datos = Tbl_ModalDespachador.fnGetData(fila);
+
+     $("#idResponsable").val(datos[1]);
+     $("#Responsable").val(datos[3]);
+});
+
+$(document).on('click', '#BtnAgregarLinea', function (e) {
+     e.preventDefault();
+     var datos = new Array();
+     var Fecha = $("#Fecha").val();
+     var idCodRepuesto = $("#idCodRepuesto").val();
+     var codRepuesto = $("#codRepuesto").val();
+     var Cantidad = $("#Cantidad").val();
+     var idMaquina = $("#idMaquina").val();
+     var Maquina = $("#Maquina").val();
+     var idResponsable = $("#idResponsable").val();
+     var Responsable = $("#Responsable").val();
+
+     iniciarArray(datos);
+     datos.push(Fecha, idCodRepuesto, codRepuesto, Cantidad, idMaquina, Maquina, idResponsable, Responsable);
+
+     if (!validaInputs(datos)) {
+          Tbl_SalidaRepuesto.fnAddData([
+               Fecha, idCodRepuesto, codRepuesto, Cantidad, idMaquina, Maquina, idResponsable, Responsable,
+               `<div class="text-center">
+               <div class="text-center ui buttons">
+                   <button class="ui yellow button" id="EditarLinea" title="Editar Linea">
+                       <i class="fa fa-edit"></i>
+                   </button>
+                   <div class="or"></div>
+                   <button class="ui google plus button" id="EliminarLinea" title="Eliminar Linea">
+                       <i class="fa fa-trash"></i>
+                   </button>
+               </div>
+           </div>`
+          ]);
+
+          OcultaCeldas();
+          LimpiarCampos();
+     } else {
+          $('#codRepuesto').focus();
+          Swal.fire({
+               position: 'center',
+               icon: 'error',
+               title: 'Por favor',
+               text: 'Complete todos los campos',
+               showConfirmButton: true,
+          });
+     }
+});
+
+$(document).on('click', '#EditarLinea', function (e) {
+     e.preventDefault();
+     filaEditar = $(this).closest("tr").get(0);
+     data = Tbl_SalidaRepuesto.fnGetData(filaEditar._DT_RowIndex);
+     $("#Fecha").val(data[0]);
+     $("#idCodRepuesto").val(data[1]);
+     $("#codRepuesto").val(data[2]);
+     $("#Cantidad").val(data[3]);
+     $("#idMaquina").val(data[4]);
+     $("#Maquina").val(data[5]);
+     $("#idResponsable").val(data[6]);
+     $("#Responsable").val(data[7]);
+
+     $('#BtnAgregarLinea').addClass('d-none');
+     $('#BtnActualizarLinea').removeClass('d-none');
+});
+
+$(document).on('click', '#BtnActualizarLinea', function (e) {
+     e.preventDefault();
+     nFila = filaEditar._DT_RowIndex;
+     Tbl_SalidaRepuesto.fnUpdate($("#Fecha").val(), nFila, 0, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#idCodRepuesto").val(), nFila, 1, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#codRepuesto").val(), nFila, 2, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#Cantidad").val(), nFila, 3, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#idMaquina").val(), nFila, 4, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#Maquina").val(), nFila, 5, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#idResponsable").val(), nFila, 6, 0, false);
+     Tbl_SalidaRepuesto.fnUpdate($("#Responsable").val(), nFila, 7, 0, false);
+
+     LimpiarCampos();
+     $('#BtnActualizarLinea').addClass('d-none');
+     $('#BtnAgregarLinea').removeClass('d-none');
+});
+
+$(document).on('click', '#EliminarLinea', function (e) {
+     e.preventDefault();
+     var row = $(this).closest("tr").get(0);
+     Tbl_SalidaRepuesto.fnDeleteRow(Tbl_SalidaRepuesto.fnGetPosition(row));
+
+});
+
+$(document).on('click', '#btnCancelarSalidaRepuesto', function (e) {
+     e.preventDefault();
+     LimpiarCampos();
+     Tbl_SalidaRepuesto.fnClearTable();
+});
+
+$(document).on('click', '#btnGuardarSalidaRepuesto', function (e) {
+     e.preventDefault();
+     var datos = new Array();
+
+     $('#Tbl_SalidaRepuesto tbody tr').each(function () {
+          var Fecha = $(this).find('td').eq(0).text();
+          var idCodRepuesto = $(this).find('td').eq(1).text();
+          var Cantidad = $(this).find('td').eq(3).text();
+          var idMaquina = $(this).find('td').eq(4).text();
+          var idResponsable = $(this).find('td').eq(6).text();
+
+          var fila = new Array(Fecha, idCodRepuesto, Cantidad, idMaquina, idResponsable);
+          datos.push(fila);
+     });
+
+     if (!validaInputs(datos[0])) {
+          $.post('back/repuesto_salida.php', { datos }, function (respuesta) {
+               if (respuesta != 'NoConex') {
+                    if (respuesta) {
+                         LimpiarCampos();
+                         Tbl_SalidaRepuesto.fnClearTable();
+                         mensaje('top', 1600, 'success', 'Datos Guardados')
+                    } else {
+                         mensaje('top', 1500, 'error', 'Datos no guardados')
+                    }
+               } else {
+                    msgErrorConexion()
+               }
+          });
+     } else {
+          $('#codRepuesto').focus();
+          Swal.fire({
+               position: 'center',
+               icon: 'error',
+               title: 'Por favor',
+               text: 'Complete todos los campos',
+               showConfirmButton: true,
+          });
+     }
+});
+
+function LimpiarCampos() {
+     $("#idCodRepuesto").val('0');
+     $("#codRepuesto").val('');
+     $("#Descripcion").val('');
+     $("#Cantidad").val('');
+     $("#selectMedida").val('0');
+     $("#idMaquina").val('0');
+     $("#Maquina").val('');
+     $("#idResponsable").val('0');
+     $("#Responsable").val('');
+}
+
+function OcultaCeldas() {
+     $("#Tbl_SalidaRepuesto tr").each(function () {
+          var crow = $(this);
+          crow.find("td:eq(1)").css("display", "none");
+          crow.find("td:eq(4)").css("display", "none");
+          crow.find("td:eq(6)").css("display", "none");
+     });
+}

@@ -2,105 +2,96 @@
 <html lang="en">
 
 <head>
-     <title>Salidas de Repuestos</title>
+     <title>Salida de Repuestos</title>
      <?php include_once("includes/head.inc"); ?>
 </head>
 <?php include_once("includes/bodyHead.inc"); ?>
-<!-- PONER PAGINAS AQUI -->
+
 <div class="container-fluid">
+     <div class="card shadow mb-1">
+          <a href="#CardSalidaRepuesto" class="d-block card-header py-3 collapsed text-black-50" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="CardSalidaRepuesto">
+               <h6 class="m-0 font-weight-bold">Salida de Repuestos</h6>
+          </a>
+          <div class="collapse show" id="CardSalidaRepuesto">
+               <section class='pt-2 card card-header'>
+                    <div class="row">
+                         <div class="col-md-2">
+                              <label>Fecha</label>
+                              <div class="form-group">
+                                   <input type="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" class="form-control validar" ID="Fecha" name='Fecha'>
+                              </div>
+                         </div>
 
-     <!-- DATOS -->
-     <section class='pt-2 card card-header'>
-          <div class='row'>
-               <!-- FECHA  -->
-               <div class="col-md-2">
-                    <label>Fecha</label>
-                    <div class="form-group">
-                         <input type="date" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" class="form-control validar" ID="txtFecha" name='Fecha'>
+                         <div class='col-md-2'>
+                              <label>Código Repuesto</label>
+                              <div class="input-group">
+                                   <span>
+                                        <button data-target="#ModalRepuestos" data-toggle="modal" id="BtnModalRepuesto" class="btn btn-secondary" title="Buscar Repuesto"><i class="fa fa-search"></i></button>
+                                   </span>
+                                   <input type="hidden" ID="idCodRepuesto" name='idCodRepuesto' value="0">
+                                   <input type="text" class="form-control validar" ID="codRepuesto" PlaceHolder="Código" name='codRepuesto'>
+                              </div>
+                         </div>
+
+                         <div class='col-md-2'>
+                              <label>Cantidad</label>
+                              <div class="input-group">
+                                   <input type="text" class="form-control validar" ID="Cantidad" name='Cantidad' placeholder="Cantidad">
+                              </div>
+                         </div>
+
+                         <div class='col-md-2'>
+                              <label># Máquina</label>
+                              <div class="input-group">
+                                   <span>
+                                        <button data-target="#ModalMaquinaria" data-toggle="modal" id="BtnModalMaquinaria" class="btn btn-secondary" title="Buscar Activo"><i class="fa fa-search"></i></button>
+                                   </span>
+                                   <input type="hidden" ID="idMaquina" name='idMaquina'>
+                                   <input type="text" class="form-control validar" ID="Maquina" PlaceHolder="Máquina" name='Maquina'>
+                              </div>
+                         </div>
+
+                         <div class='col-md-4'>
+                              <label>Responsable</label>
+                              <div class="input-group">
+                                   <span>
+                                        <button data-target="#ModalResponsable" data-toggle="modal" id="BtnModalResponsable" class="btn btn-secondary" title="Buscar Repuesto"><i class="fa fa-search"></i></button>
+                                   </span>
+                                   <input type="hidden" ID="idResponsable" name='idResponsable'>
+                                   <input type="text" class="form-control validar mr-1" ID="Responsable" PlaceHolder="Responsable" name='Responsable'>
+                                   <span>
+                                        <button id="BtnAgregarLinea" class="ui button yellow">Agregar</button>
+                                   </span>
+                                   <span>
+                                        <button id="BtnActualizarLinea" class="ui instagram button d-none">Actualizar</button>
+                                   </span>
+                              </div>
+                         </div>
                     </div>
-               </div>
+               </section>
           </div>
-
-          <div class="row">
-               <!-- CODIGO -->
-               <div class='col-md-2'>
-                    <label>Código Repuesto</label>
-                    <div class="input-group">
-                         <input type="text" class="form-control validar" ID="txtCodigo" PlaceHolder="Código" name='Codigo'>
-                         <span>
-               <button data-target="#ModalRepuestos" data-toggle="modal" id="BtnModalRepuestos" class="btn btn-secondary" title="Buscar Repuesto"><i class="fa fa-search"></i>
-                         </button>
-                         </span>
-                    </div>
-               </div>
-
-               <!-- DESCRIPCION -->
-               <div class='col-md-2'>
-                    <label>Descripción</label>
-                    <div class="input-group">
-                         <input type="text" class="form-control validar" ID="txtDescripcion" PlaceHolder="Descripción" name='Descripcion'>
-                    </div>
-               </div>
-
-               <!-- CANTIDAD -->
-               <div class='col-md-2'>
-                    <label>Cantidad</label>
-                    <div class="input-group">
-                         <input type="number" class="form-control validar" ID="txtCantidad" name='Cantidad'>
-                    </div>
-               </div>
-
-               <!-- MAQUINA -->
-               <div class='col-md-2'>
-                    <label># Máquina</label>
-                    <div class="input-group">
-                         <input type="text" class="form-control validar" ID="txtMaquina" PlaceHolder="Máquina" name='Maquina'>
-                         <span>
-                              <button data-target="#ModalMaquinaria" data-toggle="modal" id="BtnModalMaquinaria" class="btn btn-secondary" title="Buscar Activo"><i class="fa fa-search"></i></button>
-                         </span>
-                    </div>
-               </div>
-
-               <!-- RESPONSABLE -->
-               <div class='col-md-2'>
-                    <label>Responsable</label>
-                    <div class="input-group">
-                         <input type="text" class="form-control validar" ID="txtResponsable" PlaceHolder="Responsable" name='Responsable'>
-                    </div>
-               </div>
-
-               <!-- BOTON AGREGAR LINEA -->
-               <div class='col-md-2 pl-0 pt-4'>
-                    <button id="BtnAgregarSalida" class="p-3 ui primary button"><i class="fa fa-plus"></i></button>
-                    <button style="display: none;" id="BtnActualizarSalida" class="ui instagram button">Actualizar</button>
-               </div>
-          </div> <!-- FIN CLASS ROW -->
-     </section>
-     <!-- FIN DATOS -->
+     </div>
 
      <!-- TABLA -->
-     <div class="table-responsive pt-1">
-          <div class="card shadow">
-               <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Salidas de Repuestos</h6>
-               </div>
-               <section class="mt-3 card-body  border-bottom-primary">
-                    <table id="Tbl_Salidas" class="table table-hover table-sm">
+     <div class="card shadow-lg mt-2">
+          <div class="card-body">
+               <div class="table-responsive">
+                    <table id="Tbl_SalidaRepuesto" class="table table-hover table-sm w-100">
                          <thead>
                               <tr>
                                    <th><label>Fecha</label></th>
+                                   <th class="d-none"></th>
                                    <th><label>Código</label></th>
-                                   <th><label>Descripción</label></th>
                                    <th><label>Cantidad</label></th>
-                                   <th><label>Máquina</label></th>
+                                   <th class="d-none"></th>
+                                   <th><label>Maquina</label></th>
+                                   <th class="d-none"></th>
                                    <th><label>Responsable</label></th>
                                    <th><label>Acciones</label></th>
                               </tr>
                          </thead>
-                         <!--<tbody>
-                              </tbody> -->
                     </table>
-               </section>
+               </div>
           </div>
      </div>
      <!-- FIN TABLA -->
@@ -108,9 +99,8 @@
      <!-- BOTONES -->
      <section class='mt-3 input-group row'>
           <div class='col-12 float-right'>
-               <button type='submit' id='btnGuardarSalida' name='Guardar' class='btn btn-success w-25'>Guardar</button>
-               <!-- <button type='submit' name='Guardar' class='btn btn-primary w-25'>Guardar</button> -->
-               <button type="reset" id='btnCancelarSalida' class='btn btn-secondary w-25'>Cancelar</button>
+               <button type="reset" id='btnCancelarSalidaRepuesto' class='ui button red W-25'>Cancelar</button>
+               <button type='submit' id='btnGuardarSalidaRepuesto' name='Guardar' class='ui button yellow W-25'>Guardar</button>
           </div>
      </section>
      <!-- FIN BOTONES -->
@@ -126,20 +116,44 @@
                     <div class="modal-body">
                          <div class="row">
                               <div class="col-md-12">
-                                   <!-- LOS DATOS SE CARGAN POR BACKEND -->
-                                   <div id="Tbl_ModalRepSalidas"></div>
+                                   <div id="tblModalRepuestos"></div>
                               </div>
                          </div>
                          <br>
                     </div>
                     <div class="modal-footer">
-                         <button id="BtnCerrarModal" type="button" class="btn btn-primary btn-custom">Cerrar</button>
+                         <a class="ui button blue" href="repuestos_ingresos.php">Registar Repuesto</a>
+                         <button type="button" class="ui button yellow" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                </div>
 
           </div>
      </div>
      <!-- FIN MODAL REPUESTOS -->
+
+     <!-- MODAL RESPONSABLE -->
+     <div id="ModalResponsable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+          <div class="modal-dialog modal-lg" role="document">
+               <div class="modal-content">
+                    <div class="modal-header">
+                         <h3 class="modal-title" id="myModalLabel">Lista de Responsables</h3>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                         <div class="row">
+                              <div class="col-md-12">
+                                   <div id="ModalRespo"></div>
+                              </div>
+                         </div>
+                         <br>
+                    </div>
+                    <div class="modal-footer">
+                         <button id="BtnCerrarModal" type="button" class="btn btn-primary btn-custom" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <!-- FIN MODAL RESPONSABLE -->
 
      <!-- MODAL MAQUINARIA -->
      <div id="ModalMaquinaria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
@@ -152,13 +166,13 @@
                     <div class="modal-body">
                          <div class="row">
                               <div class="col-md-12">
-                                   <div id="Tbl_ModalMaqSalidas"></div>
+                                   <div id="tblModalMaquinaria"></div>
                               </div>
                          </div>
                          <br>
                     </div>
                     <div class="modal-footer">
-                         <button id="BtnCerrarModal" type="button" class="btn btn-primary btn-custom">Cerrar</button>
+                         <button type="button" class="ui button yellow" data-dismiss="modal" aria-label="Close">Cerrar</button>
                     </div>
                </div>
           </div>
@@ -166,19 +180,12 @@
      <!-- FIN MODAL MAQUINARIA -->
 
 </div>
-<!-- FIN PONER PAGINAS AQUI -->
 
 <?php
 include_once("includes/bodyFooter.inc");
 include_once("includes/footer.inc");
 ?>
 
-<script src="js/RepuestosSalida.js"></script>
+<script src="js/Repuestos_Salida.js"></script>
 
-<script type="text/javascript">
-     $(document).ready(function() {
-          $('#Tbl_ModalRepSalidas').load('tables/Tbl_ModalRepSalidas.php');
-          // $('#Tbl_ModalMaqSalidas').load('Tablas/Tbl_ModalMaqSalidas.php');
-     });
-</script>
 </html>

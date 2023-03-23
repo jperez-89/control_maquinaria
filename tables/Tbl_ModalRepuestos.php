@@ -44,13 +44,13 @@
           if (!$conex) {
                echo 'NoConex';
           } else {
-               $query = "SELECT rr.Id, rr.Codigo, rr.Descripcion, er.Cantidad, rr.Medida FROM repuesto_inventario as er INNER JOIN repuesto as rr on rr.Codigo = er.Codigo GROUP BY rr.Codigo;";
+               $query = "SELECT r.Id, r.Codigo, r.Descripcion, ri.Cantidad, r.Medida FROM repuesto_inventario as ri INNER JOIN repuesto as r on r.Codigo = ri.Codigo GROUP BY r.Codigo;";
 
                $result = mysqli_query($conex, $query);
 
                if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                         if ($row['Cantidad'] > 0) {
+                         if ($row['Cantidad'] >= 0) {
                               $btn1 = '<button id="BtnAgregarRepuesto" data-dismiss="modal" title="Agregar" class="ui button yellow"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
                          } else if ($row['Cantidad'] <= 0) {
                               $btn1 = '<button id="BtnAgregarRepuesto" disabled title="Agregar" class="ui button yellow"> <i class="fa fa-plus-circle"></i> </button>&nbsp';

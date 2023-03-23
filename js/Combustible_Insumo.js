@@ -29,7 +29,6 @@ $(document).on('click', '#BtnAgregarMaquina', function (e) {
 
     $("#idMaquina").val(fila[1]);
     $("#Maquina").val(fila[2]);
-    $('#ModalMaq').load('tables/Tbl_ModalMaquinaria.php');
 });
 
 $(document).on('click', '#BtnAgregarDespachador', function (e) {
@@ -39,7 +38,6 @@ $(document).on('click', '#BtnAgregarDespachador', function (e) {
 
     $("#idDespachador").val(fila[1]);
     $("#Despachador").val(fila[3]);
-    $('#ModalDespa').load('tables/Tbl_ModalDespachadores.php');
 });
 
 $(document).on('click', '#BtnAgregarBoletaComb', function (e) {
