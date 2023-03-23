@@ -1,16 +1,28 @@
 <script>
     Tbl_ModalIngresoCombustible = $('#Tbl_ModalIngresoCombustible').dataTable({
         retrieve: true,
-        language: {
+        "language": {
+            "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
-            "sSearch": "Buscar:",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
             "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sEmpyTable": "No hay datos en esta tabla",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
             "oPaginate": {
                 "sFirst": "Primero",
-                "sLast": "Ultimo",
+                "sLast": "Último",
                 "sNext": "Siguiente",
-                "sPrevious": "Anterior",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
         }
     });
@@ -35,7 +47,7 @@
         } else {
             $btn2 = '<button disabled id="BtnAgregarBoletaComb" data-dismiss="modal" title="Agregar" class="btn btn-primary btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
 
-            $query = "SELECT c.id, c.fecha, c.boleta, i.saldolts, c.estado FROM combustible c INNER JOIN inventario_comb i ON i.idCombustible = c.id WHERE i.saldolts > 0 ORDER BY c.fecha asc";
+            $query = "SELECT c.id, c.fecha, c.boleta, i.saldolts, c.estado FROM combustible c INNER JOIN combustible_inventario i ON i.idCombustible = c.id WHERE i.saldolts > 0 ORDER BY c.fecha asc";
             $result = mysqli_query($conex, $query);
             $btn1 = '<button id="BtnAgregarBoletaComb" data-dismiss="modal" title="Agregar" class="btn btn-warning btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
 

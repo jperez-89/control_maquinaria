@@ -9,47 +9,54 @@
 <?php include_once("includes/bodyHead.inc"); ?>
 
 <div class="container-fluid">
-    <section class='pt-2 card card-header'>
-        <div class='row'>
-            <div class='col-md-3'>
-                <label>Fecha</label>
-                <div class="form-group">
-                    <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control validar" ID="Fecha" name='Fecha' required>
-                </div>
-            </div>
+    <div class="card shadow mb-1">
+        <a href="#CardRegistroCombustible" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardRegistroCombustible">
+            <h6 class="m-0 font-weight-bold text-black-50">Registro de Combustible</h6>
+        </a>
+        <div class="collapse show" id="CardRegistroCombustible">
+            <section class='pt-2 card card-header'>
+                <div class='row'>
+                    <div class='col-md-3'>
+                        <label>Fecha</label>
+                        <div class="form-group">
+                            <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control validar" ID="Fecha" name='Fecha' required>
+                        </div>
+                    </div>
 
-            <div class='col-md-3'>
-                <label># Boleta</label>
-                <div class="input-group">
-                    <input type="text" class="form-control validar" ID="boleta" PlaceHolder="# Boleta" name='boleta' required>
-                </div>
-            </div>
+                    <div class='col-md-3'>
+                        <label># Boleta</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validar" ID="boleta" PlaceHolder="# Boleta" name='boleta' required>
+                        </div>
+                    </div>
 
-            <div class='col-md-3'>
-                <label>Cantidad de Litros</label>
-                <div class="input-group">
-                    <input type="text" class="form-control validar" ID="cantidadLts" PlaceHolder="Cantidad Lts" name='cantidadLts' required>
-                </div>
-            </div>
+                    <div class='col-md-3'>
+                        <label>Cantidad de Litros</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validar" ID="cantidadLts" PlaceHolder="Cantidad Lts" name='cantidadLts' required>
+                        </div>
+                    </div>
 
-            <div class='col-md-3'>
-                <label>Despachador</label>
-                <div class="input-group">
-                    <input type="hidden" ID="idDespachador" name='idDespachador' value="0">
-                    <span>
-                        <button data-target="#ModalDespachador" data-toggle="modal" id="BtnModalDespachador" class="btn btn-secondary"><i class="fa fa-search"></i></button>
-                    </span>
-                    <input type="text" class="form-control validar mr-1" ID="Despachador" PlaceHolder="Despachador" name='Despachador' required>
-                    <span>
-                        <button id="BtnGuardarCombustible" type="submit" class="ui icon yellow button">Guardar</button>
-                    </span>
-                    <span>
-                        <button id="BtnActualizarCombustible" class="d-none ui instagram button">Actualizar</button>
-                    </span>
+                    <div class='col-md-3'>
+                        <label>Despachador</label>
+                        <div class="input-group">
+                            <input type="hidden" ID="idDespachador" name='idDespachador' value="0">
+                            <span>
+                                <button data-target="#ModalDespachador" data-toggle="modal" id="BtnModalDespachador" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="text" class="form-control validar mr-1" ID="Despachador" PlaceHolder="Despachador" name='Despachador' required>
+                            <span>
+                                <button id="BtnGuardarCombustible" type="submit" class="ui icon yellow button">Guardar</button>
+                            </span>
+                            <span>
+                                <button id="BtnActualizarCombustible" class="d-none ui instagram button">Actualizar</button>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
+    </div>
 
     <!-- TABLA DE MAQUINARIA -->
     <div id="Tbl_CombRegistro"></div>

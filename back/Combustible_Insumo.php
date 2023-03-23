@@ -23,7 +23,7 @@ if (!$conex) {
             if (mysqli_query($conex, $query)) {
                 $id = mysqli_insert_id($conex);
 
-                $query = "UPDATE inventario_comb SET saldolts = saldolts - $cantidadlts WHERE idCombustible = $idBoletaComb";
+                $query = "UPDATE combustible_inventario SET saldolts = saldolts - $cantidadlts WHERE idCombustible = $idBoletaComb";
 
                 if (mysqli_query($conex, $query)) {
                     $repuesta = true;
@@ -39,7 +39,7 @@ if (!$conex) {
             $query = "DELETE FROM combustible_insumo WHERE id = $id";
 
             if (mysqli_query($conex, $query)) {
-                $query = "UPDATE inventario_comb SET saldolts = saldolts + $cantidadlts WHERE idCombustible = $idCombustible";
+                $query = "UPDATE combustible_inventario SET saldolts = saldolts + $cantidadlts WHERE idCombustible = $idCombustible";
 
                 if (mysqli_query($conex, $query)) {
                     $repuesta = true;
@@ -51,7 +51,7 @@ if (!$conex) {
             $idBoletaComb = trim($datos[1]);
             $cantidadlts = trim($datos[2]);
 
-            $query = "SELECT saldolts FROM inventario_comb WHERE idCombustible = $idBoletaComb";
+            $query = "SELECT saldolts FROM combustible_inventario WHERE idCombustible = $idBoletaComb";
             $datos = mysqli_query($conex, $query);
             $saldolts = mysqli_fetch_assoc($datos);
 

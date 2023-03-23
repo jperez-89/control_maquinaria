@@ -21,7 +21,7 @@ if (!$conex) {
                if (mysqli_query($conex, $query)) {
                     $id = mysqli_insert_id($conex);
 
-                    $query = "INSERT INTO inventario_comb (idCombustible, saldolts) VALUES (" . $id . ", " . $cantidadlts . ")";
+                    $query = "INSERT INTO combustible_inventario (idCombustible, saldolts) VALUES (" . $id . ", " . $cantidadlts . ")";
 
                     if (mysqli_query($conex, $query)) {
                          $repuesta = true;
@@ -32,7 +32,7 @@ if (!$conex) {
           case 'eliminar':
                $id = trim($datos[1]);
 
-               $query = "DELETE FROM inventario_comb WHERE idCombustible = $id";
+               $query = "DELETE FROM combustible_inventario WHERE idCombustible = $id";
 
                if (mysqli_query($conex, $query)) {
                     $query = "DELETE FROM combustible WHERE id = $id";
@@ -43,7 +43,6 @@ if (!$conex) {
                }
                break;
      }
-
 
      mysqli_close($conex);
      echo $repuesta;

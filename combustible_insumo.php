@@ -8,69 +8,76 @@
 <?php include_once("includes/bodyHead.inc"); ?>
 <!-- PONER PAGINAS AQUI -->
 <div class="container-fluid">
+    <div class="card shadow mb-1">
+        <a href="#CardRegistroInsumo" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardRegistroInsumo">
+            <h6 class="m-0 font-weight-bold text-black-50">Registro Insumo de Combustible</h6>
+        </a>
+        <div class="collapse show" id="CardRegistroInsumo">
 
-    <section class='pt-2 card card-header'>
-        <div class="row">
-            <div class="col-md-2">
-                <label>Fecha</label>
-                <div class="form-group">
-                    <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control validar" ID="Fecha" name='Fecha'>
-                </div>
-            </div>
+            <section class='pt-2 card card-header'>
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Fecha</label>
+                        <div class="form-group">
+                            <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control validar" ID="Fecha" name='Fecha'>
+                        </div>
+                    </div>
 
-            <div class='col-md-2'>
-                <label>Boleta Despacho</label>
-                <div class="input-group">
-                    <input type="text" class="form-control validar" ID="Boleta" PlaceHolder="# Boleta" name='Boleta'>
-                </div>
-            </div>
+                    <div class='col-md-2'>
+                        <label>Boleta Despacho</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validar" ID="Boleta" PlaceHolder="# Boleta" name='Boleta'>
+                        </div>
+                    </div>
 
-            <div class='col-md-2'>
-                <label># Máquina</label>
-                <div class="input-group">
-                    <span>
-                        <button data-target="#ModalMaquinaria" data-toggle="modal" id="BtnModalMaquinaria" class="btn btn-secondary" title="Buscar Activo"><i class="fa fa-search"></i></button>
-                    </span>
-                    <input type="hidden" ID="idMaquina" name='idMaquina' value="0">
-                    <input type="text" class="form-control validar" ID="Maquina" PlaceHolder="Máquina" name='Maquina'>
-                </div>
-            </div>
+                    <div class='col-md-2'>
+                        <label># Máquina</label>
+                        <div class="input-group">
+                            <span>
+                                <button data-target="#ModalMaquinaria" data-toggle="modal" id="BtnModalMaquinaria" class="btn btn-secondary" title="Buscar Activo"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="hidden" ID="idMaquina" name='idMaquina' value="0">
+                            <input type="text" class="form-control validar" ID="Maquina" PlaceHolder="Máquina" name='Maquina'>
+                        </div>
+                    </div>
 
-            <div class='col-md-2'>
-                <label>Boleta Combustible</label>
-                <div class="input-group">
-                    <span>
-                        <button data-target="#ModalBoletaCombustible" data-toggle="modal" id="BtnModalBoletaComb" class="btn btn-secondary" title="Buscar Boleta"><i class="fa fa-search"></i></button>
-                    </span>
-                    <input type="hidden" ID="idBoletaComb" name='idBoletaComb' value="0">
-                    <input type="text" class="form-control validar" ID="BoletaComb" PlaceHolder="# Boleta" name='BoletaComb'>
-                </div>
-            </div>
+                    <div class='col-md-2'>
+                        <label>Boleta Combustible</label>
+                        <div class="input-group">
+                            <span>
+                                <button data-target="#ModalBoletaCombustible" data-toggle="modal" id="BtnModalBoletaComb" class="btn btn-secondary" title="Buscar Boleta"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="hidden" ID="idBoletaComb" name='idBoletaComb' value="0">
+                            <input type="text" class="form-control validar" ID="BoletaComb" PlaceHolder="# Boleta" name='BoletaComb'>
+                        </div>
+                    </div>
 
-            <div class='col-md-1'>
-                <label>Cantidad</label>
-                <div class="input-group">
-                    <input type="text" class="form-control validar" ID="Cantidad" PlaceHolder="Cantidad" name='Cantidad'>
-                </div>
-            </div>
+                    <div class='col-md-1'>
+                        <label>Cantidad</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control validar" ID="Cantidad" PlaceHolder="Cantidad" name='Cantidad'>
+                        </div>
+                    </div>
 
-            <div class='col-md-3'>
-                <label>Responsable</label>
-                <div class="input-group">
-                    <input type="hidden" ID="idDespachador" name='idDespachador' value="0">
-                    <span>
-                        <button data-target="#ModalDespachador" data-toggle="modal" id="BtnModalDespachador" class="btn btn-secondary"><i class="fa fa-search"></i></button>
-                    </span>
-                    <input type="text" class="form-control validar mr-1" ID="Despachador" PlaceHolder="Despachador" name='Despachador' required>
-                    <span>
-                        <button id="BtnGuardarInsumo" type="submit" class="ui icon yellow button">Guardar</button>
-                    </span>
-                    <span>
-                        <button id="BtnActualizarLineaInsumo" class="d-none ui instagram button">Actualizar</button>
-                    </span>
-                </div>
-            </div>
-    </section>
+                    <div class='col-md-3'>
+                        <label>Responsable</label>
+                        <div class="input-group">
+                            <input type="hidden" ID="idDespachador" name='idDespachador' value="0">
+                            <span>
+                                <button data-target="#ModalDespachador" data-toggle="modal" id="BtnModalDespachador" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                            </span>
+                            <input type="text" class="form-control validar mr-1" ID="Despachador" PlaceHolder="Despachador" name='Despachador' required>
+                            <span>
+                                <button id="BtnGuardarInsumo" type="submit" class="ui icon yellow button">Guardar</button>
+                            </span>
+                            <span>
+                                <button id="BtnActualizarLineaInsumo" class="d-none ui instagram button">Actualizar</button>
+                            </span>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </div>
 
     <!-- TABLA DE MAQUINARIA -->
     <div id="Tbl_insumoComb"></div>

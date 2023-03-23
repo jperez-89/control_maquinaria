@@ -11,32 +11,34 @@ function FechaActual() {
           dia = '0' + dia; //agrega cero si el menor de 10
      if (mes < 10)
           mes = '0' + mes //agrega cero si el menor de 10
-     $('#Fecha').val( anho + "-" + mes + "-" + dia);
+     $('#Fecha').val(anho + "-" + mes + "-" + dia);
 }
 
 function mensaje(position, timer, icon, title) {
-    const Toast = Swal.mixin({
-         toast: true,
-         position: position,
-         showConfirmButton: false,
-         timer: timer,
-    })
+     const Toast = Swal.mixin({
+          toast: true,
+          position: position,
+          showConfirmButton: false,
+          timer: timer,
+     })
 
-    Toast.fire({
-         icon: icon,
-         title: title
-    });
+     Toast.fire({
+          icon: icon,
+          title: title
+     });
 }
 
 function validaInputs(datos) {
-     // console.log(datos);
-     let vacio;
+     var cont = 0;
+     var vacio = false;
      for (let i = 0; i < datos.length; i++) {
-          if (datos[i] == '' || datos[i] == 0) {
-               vacio = true;
-          } else {
-               vacio = false;
+          if (datos[i] == "" || datos[i] == 0) {
+               cont++;
           }
+     }
+
+     if (cont > 0) {
+          vacio = true
      }
      return vacio;
 }
@@ -45,13 +47,13 @@ function iniciarArray(array) {
      array.splice(0, array.length);
 }
 
-function msgError(title, text) { 
+function msgError(title, text) {
      Swal.fire({
           // icon: 'error',
           title: title,
           text: text,
-        });
- }
+     });
+}
 
 function msgErrorConexion() {
      const Toast = Swal.mixin({
@@ -69,4 +71,4 @@ function msgErrorConexion() {
 
 function pfrm(frm) {
      new Response(frm).text().then(console.log);
- }
+}

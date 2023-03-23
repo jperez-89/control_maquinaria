@@ -11,9 +11,9 @@
 <div class="container-fluid">
      <div class="card shadow mb-1">
           <a href="#CardRegistroMaquina" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardRegistroMaquina">
-               <h6 class="m-0 font-weight-bold text-primary">Registar</h6>
+               <h6 class="m-0 font-weight-bold text-black-50">Registro de Maquinaria</h6>
           </a>
-          <div class="collapse" id="CardRegistroMaquina">
+          <div class="collapse show" id="CardRegistroMaquina">
                <section class='pt-2 card card-header'>
                     <div class='row'>
                          <div class='col-md-3'>
@@ -64,7 +64,7 @@
 include_once("includes/bodyFooter.inc");
 include_once("includes/footer.inc");
 ?>
-<script src="js/MaquinariaRegistro.js" type="text/javascript"></script>
+<script src="js/Maquinaria_Registro.js" type="text/javascript"></script>
 
 <script type="text/javascript">
      $(document).ready(function() {

@@ -92,7 +92,7 @@
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"> <?php echo $Uname ?> - <?php echo $Urol ?> </span>
                 <img class="img-profile rounded-circle"
-                  src="http://www.upr.edu/red-ici/wp-content/uploads/sites/66/2017/05/1211811759.png">
+                  src="./img/user.png">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

@@ -11,7 +11,7 @@
 <div class="container-fluid">
     <div class="card shadow mb-1">
         <a href="#CardRegistroCombustible" class="d-block card-header py-3 collapsed text-black-50" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="CardRegistroCombustible">
-            <h6 class="m-0 font-weight-bold">Registar Despachadores</h6>
+            <h6 class="m-0 font-weight-bold">Registro de Despachadores</h6>
         </a>
         <div class="collapse show" id="CardRegistroCombustible">
             <section class='pt-2 card card-header'>
