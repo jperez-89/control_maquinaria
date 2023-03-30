@@ -4,32 +4,31 @@
 <head>
      <title>Reportes de Repuestos</title>
      <?php include_once("includes/head.inc"); ?>
-     <script src="js/ReporteTablaGeneral.js"></script>
 </head>
 <?php include_once("includes/bodyHead.inc"); ?>
 
 <!-- PONER PAGINAS AQUI -->
 <div class="container-fluid">
+     <!-- BOTONES DE EXPORTAR  -->
      <div class="card shadow mb-1">
           <a href="#CardExportar" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardExportar">
-               <h6 class="m-0 font-weight-bold text-primary">Exportar a Excel</h6>
+               <h6 class="m-0 font-weight-bold text-gray-800">Exportar a Excel</h6>
           </a>
-          <div class="collapse" id="CardExportar" style="">
+          <div class="collapse" id="CardExportar">
                <div class="m-2">
-                    <a href="BackEnd/Exportar.php/?exportar=registro_repuestos" class="btn btn-outline-info">Exportar Entradas</a>
-                    <a href="BackEnd/Exportar.php/?exportar=salida_repuestos" class="btn btn-outline-dark ">Exportar Salidas</a>
-                    <a href="BackEnd/Exportar.php/?exportar=inventario" class="btn btn-outline-success ">Exportar Inventario</a>
+                    <a href="Back/Exportar.php/?exportar=IngresoRepuesto" class="btn btn-outline-info">Exportar Entradas</a>
+                    <a href="Back/Exportar.php/?exportar=SalidaRepuestos" class="btn btn-outline-dark ">Exportar Salidas</a>
+                    <a href="Back/Exportar.php/?exportar=InventarioRepuestos" class="btn btn-outline-success ">Exportar Inventario</a>
                </div>
           </div>
-
      </div>
-     <!-- COMPRA REPUESTOS -->
+
+     <!-- INGRESO REPUESTOS -->
      <div class="card shadow mb-1">
-          <a href="#CardReporteCompraRepuestos" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardReporteCompraRepuestos">
-               <h6 class="m-0 font-weight-bold text-primary">Reporte Compra Repuestos</h6>
+          <a href="#CardReporteIngresoRepuestos" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardReporteIngresoRepuestos">
+               <h6 class="m-0 font-weight-bold text-gray-800">Reporte Ingreso de Repuestos</h6>
           </a>
-          <div class="collapse" id="CardReporteCompraRepuestos" style="">
-               <!-- TABLA -->
+          <div class="collapse" id="CardReporteIngresoRepuestos" style="">
                <div class="table-responsive">
                     <div class="card shadow">
                          <div class="card-body">
@@ -39,12 +38,11 @@
                                              <tr>
                                                   <th><label>Id</label></th>
                                                   <th><label>Fecha</label></th>
-                                                  <th><label>Comprobante</label></th>
-                                                  <th><label>Cantidad</label></th>
                                                   <th><label>Código</label></th>
                                                   <th><label>Descripción</label></th>
-                                                  <th><label>Orden de compra</label></th>
+                                                  <th><label>Cantidad</label></th>
                                                   <th><label>Medida</label></th>
+                                                  <th><label>Comprobante</label></th>
                                              </tr>
                                         </thead>
 
@@ -53,21 +51,20 @@
                                         if (!$conex) {
                                              echo 'NoConex';
                                         } else {
-                                             $query = "SELECT * FROM registro_repuestos;";
-                                             $result = mysqli_query($conex, $query);
+                                             $queryIngresos = "SELECT id, Fecha, Codigo, Descripcion, Cantidad, Medida, Comprobante FROM repuesto ORDER BY Fecha DESC;";
+                                             $result = mysqli_query($conex, $queryIngresos);
 
                                              if (mysqli_num_rows($result) > 0) {
                                                   while ($row = mysqli_fetch_assoc($result)) {
                                         ?>
                                                        <tr>
-                                                            <td><?php echo $row['Id']; ?></td>
+                                                            <td><?php echo $row['id']; ?></td>
                                                             <td><?php echo $row['Fecha']; ?></td>
-                                                            <td><?php echo $row['Comprobante']; ?></td>
-                                                            <td><?php echo $row['Cantidad']; ?></td>
                                                             <td><?php echo $row['Codigo']; ?></td>
                                                             <td><?php echo $row['Descripcion']; ?></td>
-                                                            <td><?php echo $row['OrdenCompra']; ?></td>
+                                                            <td><?php echo $row['Cantidad']; ?></td>
                                                             <td><?php echo $row['Medida']; ?></td>
+                                                            <td><?php echo $row['Comprobante']; ?></td>
                                                        </tr>
                                         <?php
                                                   }
@@ -78,18 +75,15 @@
                          </div>
                     </div>
                </div>
-               <!-- FIN TABLA -->
           </div>
      </div>
-     <!-- FIN COMPRA REPUESTOS -->
 
      <!-- SALIDAS REPUESTOS -->
      <div class="card shadow mb-1">
           <a href="#CardReporteSalidaRepuestos" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardReporteSalidaRepuestos">
-               <h6 class="m-0 font-weight-bold text-primary">Reporte Salida Repuestos</h6>
+               <h6 class="m-0 font-weight-bold text-gray-800">Reporte Salida Repuestos</h6>
           </a>
-          <div class="collapse" id="CardReporteSalidaRepuestos" style="">
-               <!-- TABLA -->
+          <div class="collapse" id="CardReporteSalidaRepuestos">
                <div class="table-responsive">
                     <div class="card shadow">
                          <div class="card-body">
@@ -99,10 +93,10 @@
                                              <tr>
                                                   <th><label>Id</label></th>
                                                   <th><label>Fecha</label></th>
-                                                  <th><label>Código</label></th>
+                                                  <th><label>Código de Repuesto</label></th>
                                                   <th><label>Descripción</label></th>
                                                   <th><label>Cantidad</label></th>
-                                                  <th><label>Máquina</label></th>
+                                                  <th><label>Código de Máquina</label></th>
                                                   <th><label>Responsable</label></th>
                                              </tr>
                                         </thead>
@@ -112,20 +106,21 @@
                                         if (!$conex) {
                                              echo 'NoConex';
                                         } else {
-                                             $query = "SELECT * FROM salida_repuestos;";
-                                             $result = mysqli_query($conex, $query);
+                                             $querySalidas = "SELECT rs.id, rs.Fecha, r.Codigo AS codRepuesto, r.Descripcion, rs.Cantidad, m.Codigo AS codMaquina, desp.nombre FROM repuesto_salida rs right JOIN repuesto r ON r.id = rs.idRepuesto INNER JOIN maquinaria m ON m.Id = rs.idMaquina INNER JOIN despachador desp ON desp.id = rs.idResponsable ORDER BY rs.Fecha DESC;";
+
+                                             $result = mysqli_query($conex, $querySalidas);
 
                                              if (mysqli_num_rows($result) > 0) {
                                                   while ($row = mysqli_fetch_assoc($result)) {
                                         ?>
                                                        <tr>
-                                                            <td><?php echo $row['Id']; ?></td>
+                                                            <td><?php echo $row['id']; ?></td>
                                                             <td><?php echo $row['Fecha']; ?></td>
-                                                            <td><?php echo $row['Codigo']; ?></td>
+                                                            <td><?php echo $row['codRepuesto']; ?></td>
                                                             <td><?php echo $row['Descripcion']; ?></td>
                                                             <td><?php echo $row['Cantidad']; ?></td>
-                                                            <td><?php echo $row['Maquina']; ?></td>
-                                                            <td><?php echo $row['Responsable']; ?></td>
+                                                            <td><?php echo $row['codMaquina']; ?></td>
+                                                            <td><?php echo $row['nombre']; ?></td>
                                                        </tr>
                                         <?php
                                                   }
@@ -136,18 +131,15 @@
                          </div>
                     </div>
                </div>
-               <!-- FIN TABLA -->
           </div>
      </div>
-     <!-- FIN SALIDAS REPUESTOS -->
 
      <!-- INVENTARIO ACTUALIZADO -->
      <div class="card shadow mb-1">
-          <a href="#InventarioActualizado" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="InventarioActualizado">
-               <h6 class="m-0 font-weight-bold text-primary">Reporte de Inventario de Repuestos Diario</h6>
+          <a href="#ReporteInventarioActualizado" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="ReporteInventarioActualizado">
+               <h6 class="m-0 font-weight-bold text-gray-800">Reporte Inventario de Repuestos</h6>
           </a>
-          <div class="collapse" id="InventarioActualizado" style="">
-               <!-- TABLA -->
+          <div class="collapse" id="ReporteInventarioActualizado">
                <div class="table-responsive">
                     <div class="card shadow">
                          <div class="card-body">
@@ -167,8 +159,9 @@
                                         if (!$conex) {
                                              echo 'NoConex';
                                         } else {
-                                             $query = "SELECT er.Codigo, rr.Descripcion, er.Cantidad, rr.Medida FROM existencia_repuestos as er INNER JOIN registro_repuestos as rr on rr.Codigo = er.Codigo GROUP BY er.Codigo;";
-                                             $result = mysqli_query($conex, $query);
+                                             $queryInventario = "SELECT r.Codigo, r.Descripcion, ri.Cantidad, r.Medida FROM repuesto_inventario AS ri INNER JOIN repuesto AS r on r.Codigo = ri.Codigo GROUP BY r.Codigo;";
+
+                                             $result = mysqli_query($conex, $queryInventario);
 
                                              if (mysqli_num_rows($result) > 0) {
                                                   while ($row = mysqli_fetch_assoc($result)) {
@@ -188,13 +181,8 @@
                          </div>
                     </div>
                </div>
-               <!-- FIN TABLA -->
           </div>
      </div>
-     <!-- FIN INVENTARIO ACTUALIZADO -->
-
-
-
 </div>
 <!-- FIN PONER PAGINAS AQUI -->
 
@@ -202,6 +190,8 @@
 include_once("includes/bodyFooter.inc");
 include_once("includes/footer.inc");
 ?>
+
+<script src="js/Repuestos_Reportes.js"></script>
 
 </body>
 
