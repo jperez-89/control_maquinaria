@@ -58,7 +58,7 @@
 
                                              if (mysqli_num_rows($result) > 0) {
                                                   while ($row = mysqli_fetch_assoc($result)) {
-                                                       ?>
+                                        ?>
                                                        <tr>
                                                             <td><?php echo $row['Id']; ?></td>
                                                             <td><?php echo $row['Fecha']; ?></td>
@@ -117,7 +117,7 @@
 
                                              if (mysqli_num_rows($result) > 0) {
                                                   while ($row = mysqli_fetch_assoc($result)) {
-                                                       ?>
+                                        ?>
                                                        <tr>
                                                             <td><?php echo $row['Id']; ?></td>
                                                             <td><?php echo $row['Fecha']; ?></td>
@@ -172,7 +172,7 @@
 
                                              if (mysqli_num_rows($result) > 0) {
                                                   while ($row = mysqli_fetch_assoc($result)) {
-                                                       ?>
+                                        ?>
                                                        <tr>
                                                             <td><?php echo $row['Codigo']; ?></td>
                                                             <td><?php echo $row['Descripcion']; ?></td>
@@ -202,5 +202,7 @@
 include_once("includes/bodyFooter.inc");
 include_once("includes/footer.inc");
 ?>
+
+</body>
 
 </html>

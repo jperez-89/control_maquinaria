@@ -32,10 +32,25 @@ function validaInputs(datos) {
      var cont = 0;
      var vacio = false;
      for (let i = 0; i < datos.length; i++) {
-          if (datos[i] == "" || datos[i] == 0) {
+          if (datos[i] === "" || datos[i] === 0) {
                cont++;
           }
      }
+
+     if (cont > 0) {
+          vacio = true
+     }
+     return vacio;
+}
+
+function validaArrayAsociativo(datos) {
+     var cont = 0;
+     var vacio = false;
+     datos.forEach(element => {
+          if (element.codRepuesto == "" || element.Descripcion == "" || element == "0") {
+               cont++
+          }
+     });
 
      if (cont > 0) {
           vacio = true

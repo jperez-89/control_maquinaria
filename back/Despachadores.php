@@ -27,7 +27,6 @@ if (!$conex) {
             $id = trim($datos[1]);
             $identificacion = trim($datos[2]);
             $nombre = trim(strtoupper($datos[3]));
-            var_dump($nombre);
             $telefono = trim($datos[4]);
 
             $query = "UPDATE despachador SET identificacion = '$identificacion', nombre = '$nombre', telefono = '$telefono' WHERE id = $id";

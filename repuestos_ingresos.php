@@ -8,11 +8,11 @@
 <?php include_once("includes/bodyHead.inc"); ?>
 
 <div class="container-fluid">
-     <div class="card shadow mb-1">
+     <!-- <div class="card shadow mb-1">
           <a href="#CardRegistroRepuesto" class="d-block card-header py-3 collapsed text-black-50" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="CardRegistroRepuesto">
                <h6 class="m-0 font-weight-bold">Registro de Repuestos</h6>
           </a>
-          <div class="collapse show" id="CardRegistroRepuesto">
+          <div class="collapse" id="CardRegistroRepuesto">
                <section class='pt-2 card card-header'>
                     <div class="row">
                          <div class="col-md-2">
@@ -75,23 +75,35 @@
                     </div>
                </section>
           </div>
+     </div> -->
+
+     <div class="row">
+          <div class="col-md-2">
+               <input type="text" class="form-control validar mr-1" ID="nSolicitud" PlaceHolder="Número de Solicitud" name='nSolicitud'>
+          </div>
+          <div class="col-md-2">
+               <button id="BtnBuscarnSolicitud" class="ui button yellow">Buscar</button>
+          </div>
      </div>
 
      <!-- TABLA -->
-     <div class="card shadow-lg mt-2">
+     <div class="card shadow-lg mt-3">
           <div class="card-body">
                <div class="table-responsive">
                     <table id="Tbl_RegistroRepuesto" class="table table-hover table-sm w-100">
                          <thead>
                               <tr>
-                                   <th><label>Fecha</label></th>
+                                   <th class="d-none"></th>
+                                   <th><label>Código Máquina</label></th>
                                    <th class="d-none"></th>
                                    <th><label>Código</label></th>
                                    <th><label>Descripción</label></th>
                                    <th><label>Cantidad</label></th>
                                    <th><label>Medida</label></th>
+                                   <th><label>Estado</label></th>
                                    <th><label>Comprobante</label></th>
                                    <th><label>Acciones</label></th>
+                                   <th class="d-none"></th>
                               </tr>
                          </thead>
                     </table>
@@ -101,7 +113,7 @@
      <!-- FIN TABLA -->
 
      <!-- BOTONES -->
-     <section class='mt-3 input-group row'>
+     <section class='mt-4 input-group row'>
           <div class='col-12 float-right'>
                <button type="reset" id='btnCancelarRegistroRepuesto' class='ui button red W-25'>Cancelar</button>
                <button type='submit' id='btnGuardarRegistroRepuesto' name='Guardar' class='ui button yellow W-25'>Guardar</button>
@@ -109,31 +121,31 @@
      </section>
      <!-- FIN BOTONES -->
 
-    <!-- MODAL REPUESTOS -->
-    <div id="ModalRepuestos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel">Lista de Repuestos</h3>
-                    <button type="button" id="BtnXModalClientes" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="tblModalRepuestos"></div>
-                        </div>
+     <!-- MODAL REPUESTOS -->
+     <div id="ModalRepuestos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+          <div class="modal-dialog modal-lg" role="document">
+               <div class="modal-content">
+                    <div class="modal-header">
+                         <h3 class="modal-title" id="myModalLabel">Lista de Repuestos</h3>
+                         <button type="button" id="BtnXModalClientes" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <br>
-                </div>
-                <div class="modal-footer">
-                    <a class="ui button blue" href="repuestos_ingresos.php">Registar Repuesto</a>
-                    <button type="button" class="ui button yellow" data-dismiss="modal" aria-label="Close">Cerrar</button>
-                </div>
-            </div>
+                    <div class="modal-body">
+                         <div class="row">
+                              <div class="col-md-12">
+                                   <div id="tblModalRepuestos"></div>
+                              </div>
+                         </div>
+                         <br>
+                    </div>
+                    <div class="modal-footer">
+                         <a class="ui button blue" href="repuestos_ingresos.php">Registar Repuesto</a>
+                         <button type="button" class="ui button yellow" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    </div>
+               </div>
 
-        </div>
-    </div>
-    <!-- FIN MODAL REPUESTOS -->
+          </div>
+     </div>
+     <!-- FIN MODAL REPUESTOS -->
 
 </div>
 
@@ -143,5 +155,7 @@ include_once("includes/footer.inc");
 ?>
 
 <script src="js/Repuestos_Ingresos.js"></script>
+
+</body>
 
 </html>

@@ -163,42 +163,40 @@ $(document).on('click', '#btnCancelarSalidaRepuesto', function (e) {
 
 $(document).on('click', '#btnGuardarSalidaRepuesto', function (e) {
      e.preventDefault();
-     var datos = new Array();
+     if (Tbl_SalidaRepuesto.fnGetData().length > 0) {
+          var datos = new Array();
 
-     $('#Tbl_SalidaRepuesto tbody tr').each(function () {
-          var Fecha = $(this).find('td').eq(0).text();
-          var idCodRepuesto = $(this).find('td').eq(1).text();
-          var Cantidad = $(this).find('td').eq(3).text();
-          var idMaquina = $(this).find('td').eq(4).text();
-          var idResponsable = $(this).find('td').eq(6).text();
+          $('#Tbl_SalidaRepuesto tbody tr').each(function () {
+               var Fecha = $(this).find('td').eq(0).text();
+               var idCodRepuesto = $(this).find('td').eq(1).text();
+               var Cantidad = $(this).find('td').eq(3).text();
+               var idMaquina = $(this).find('td').eq(4).text();
+               var idResponsable = $(this).find('td').eq(6).text();
 
-          var fila = new Array(Fecha, idCodRepuesto, Cantidad, idMaquina, idResponsable);
-          datos.push(fila);
-     });
+               var fila = new Array(Fecha, idCodRepuesto, Cantidad, idMaquina, idResponsable);
+               datos.push(fila);
+          });
 
-     if (!validaInputs(datos[0])) {
-          $.post('back/repuesto_salida.php', { datos }, function (respuesta) {
-               if (respuesta != 'NoConex') {
-                    if (respuesta) {
-                         LimpiarCampos();
-                         Tbl_SalidaRepuesto.fnClearTable();
-                         mensaje('top', 1600, 'success', 'Datos Guardados')
+          if (!validaInputs(datos[0])) {
+               $.post('back/repuesto_salida.php', { datos }, function (respuesta) {
+                    if (respuesta != 'NoConex') {
+                         if (respuesta) {
+                              LimpiarCampos();
+                              Tbl_SalidaRepuesto.fnClearTable();
+                              mensaje('top', 1600, 'success', 'Datos Guardados');
+                         } else {
+                              mensaje('top', 1600, 'error', 'Datos no guardados');
+                         }
                     } else {
-                         mensaje('top', 1500, 'error', 'Datos no guardados')
+                         msgErrorConexion()
                     }
-               } else {
-                    msgErrorConexion()
-               }
-          });
+               });
+          } else {
+               $('#codRepuesto').focus();
+               mensaje('top', 1600, 'error', 'Falta algún dato en la tabla');
+          }
      } else {
-          $('#codRepuesto').focus();
-          Swal.fire({
-               position: 'center',
-               icon: 'error',
-               title: 'Por favor',
-               text: 'Complete todos los campos',
-               showConfirmButton: true,
-          });
+          mensaje('top', 1600, 'info', 'No hay datos para guardar')
      }
 });
 

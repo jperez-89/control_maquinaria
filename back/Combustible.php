@@ -3,11 +3,11 @@
 include_once('../includes/conexion.inc');
 // VALIDA SI SE HIZO BIEN LA CONEXION CON LA BASE DE DATOS
 if (!$conex) {
-     $repuesta = 'NoConex';
+     $respuesta = 'NoConex';
 } else {
      $datos = $_REQUEST['datos'];
      $op = $datos[0];
-     $repuesta = false;
+     $respuesta = false;
 
      switch ($op) {
           case 'insertar':
@@ -24,7 +24,7 @@ if (!$conex) {
                     $query = "INSERT INTO combustible_inventario (idCombustible, saldolts) VALUES (" . $id . ", " . $cantidadlts . ")";
 
                     if (mysqli_query($conex, $query)) {
-                         $repuesta = true;
+                         $respuesta = true;
                     }
                }
                break;
@@ -38,12 +38,12 @@ if (!$conex) {
                     $query = "DELETE FROM combustible WHERE id = $id";
 
                     if (mysqli_query($conex, $query)) {
-                         $repuesta = true;
+                         $respuesta = true;
                     }
                }
                break;
      }
 
      mysqli_close($conex);
-     echo $repuesta;
+     echo $respuesta;
 }

@@ -1,0 +1,94 @@
+<?php
+include_once('../includes/conexion.inc');
+if (!$conex) {
+    $repuesta = 'NoConex';
+} else {
+    $datos = $_REQUEST['datos'];
+    $op = $datos[0];
+    $repuesta = false;
+
+
+    switch ($op) {
+        case 'ingresoMensualCombustible':
+            $query = "SELECT SUM(cantidadlts) AS ingresoMensualCombustible FROM `combustible` WHERE fecha BETWEEN FIRST_DAY(NOW()) AND LAST_DAY(NOW());";
+            $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
+            $repuesta = $datos['ingresoMensualCombustible'];
+
+            break;
+
+        case 'consumoMensualCombustible':
+            $query = "SELECT SUM(cantidadlts) AS consumoMensualCombustible FROM `combustible_insumo` WHERE fecha BETWEEN FIRST_DAY(NOW()) AND LAST_DAY(NOW());";
+            $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
+            $repuesta = $datos['consumoMensualCombustible'];
+
+            break;
+
+        case 'MaquinariaDisponible':
+            $query = "SELECT ROUND((((SELECT COUNT(Id) FROM maquinaria WHERE Estado = 1) / (SELECT COUNT(Id) FROM maquinaria)) * 100), 0) AS MaquinariaDisponible;";
+            $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
+            $repuesta = $datos['MaquinariaDisponible'];
+
+            break;
+
+        case 'SoliRepuestoPendiente':
+            $query = "SELECT COUNT(id) AS SoliRepuestoPendiente FROM `repuesto_solicitud` WHERE estado = 0;";
+            $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
+            $repuesta = $datos['SoliRepuestoPendiente'];
+
+            break;
+
+        case 'RevisarMaquina':
+            $query = "SELECT * FROM `maquinaria` WHERE Codigo = '$datos[1]';";
+            $repuesta = json_encode(mysqli_fetch_assoc(mysqli_query($conex, $query)), JSON_UNESCAPED_UNICODE);
+
+            break;
+
+        case 'seguimientoSolicitud':
+            $table['table'] = '<div class="card shadow-lg mt-2">
+                        <div class="card-body">
+                            <div class="table-responsiv-lg">
+                                <table id="tblVerSolicitudes" class="table table-hover table-sm w-100">
+                                    <thead>
+                                        <tr>
+                                            <th><label># Máquina</label></th>
+                                            <th><label>Código Repuesto</label></th>
+                                            <th><label>Descripcion</label></th>
+                                            <th><label>Cantidad</label></th>
+                                            <th><label>Medida</label></th>
+                                            <th><label>Estado</label></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>';
+
+            $query = "SELECT rs.fecha, m.Codigo AS codMaquina, r.Codigo AS codRepuesto, r.Descripcion, rsd.cantidad, r.Medida, rsd.estado FROM repuesto_solicituddetalle rsd INNER JOIN  repuesto_solicitud rs ON rs.id = rsd.idSolicitud INNER JOIN repuesto r ON r.id = rsd.idRepuesto INNER JOIN maquinaria m ON m.id = rsd.idMaquina WHERE rsd.idSolicitud = $datos[1]";
+
+            $datos = mysqli_query($conex, $query);
+
+            if (mysqli_num_rows($datos) > 0) {
+                while ($linea = mysqli_fetch_assoc($datos)) {
+                    $table['fecha'] = $linea['fecha'];
+                    $table['table'] .= "<tr>";
+                    $table['table'] .= "<td>" . $linea['codMaquina'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['codRepuesto'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['Descripcion'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['cantidad'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['Medida'] . "</td>";
+                    $table['table'] .= "<td>" . $estado = ($linea['estado']) ? '<span class="badge badge-success">Comprado</>' : '<span class="badge badge-info">Pendiente</>' . "</td>";
+                    $table['table'] .= "</tr>";
+                }
+
+                $table['table'] .= "</table>
+                </div>
+                </div>
+                </div>";
+
+                $repuesta = json_encode($table, JSON_UNESCAPED_UNICODE);
+            } else {
+                $repuesta = 0;
+            }
+            break;
+    }
+
+    mysqli_close($conex);
+    echo $repuesta;
+}

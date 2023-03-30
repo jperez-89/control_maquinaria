@@ -107,7 +107,7 @@
 
      <!-- MODAL REPUESTOS -->
      <div id="ModalRepuestos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog modal-xl" role="document">
                <div class="modal-content">
                     <div class="modal-header">
                          <h3 class="modal-title" id="myModalLabel">Lista de Repuestos</h3>
@@ -133,7 +133,7 @@
 
      <!-- MODAL RESPONSABLE -->
      <div id="ModalResponsable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog modal-xl" role="document">
                <div class="modal-content">
                     <div class="modal-header">
                          <h3 class="modal-title" id="myModalLabel">Lista de Responsables</h3>
@@ -157,7 +157,7 @@
 
      <!-- MODAL MAQUINARIA -->
      <div id="ModalMaquinaria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog modal-xl" role="document">
                <div class="modal-content">
                     <div class="modal-header">
                          <h3 class="modal-title" id="myModalLabel">Lista de Maquinaria</h3>
@@ -187,5 +187,7 @@ include_once("includes/footer.inc");
 ?>
 
 <script src="js/Repuestos_Salida.js"></script>
+
+</body>
 
 </html>

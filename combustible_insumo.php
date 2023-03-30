@@ -171,4 +171,6 @@ include_once("includes/footer.inc");
     });
 </script>
 
+</body>
+
 </html>

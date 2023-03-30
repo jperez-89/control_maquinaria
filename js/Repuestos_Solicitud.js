@@ -143,25 +143,69 @@ $(document).on('click', '#btnCancelarSolicitudRepuesto', function (e) {
 
 $(document).on('click', '#btnGuardarSolicitudRepuesto', function (e) {
     e.preventDefault();
+    if (Tbl_SolicitudRepuesto.fnGetData().length > 0) {
+        var datos = new Array();
+        iniciarArray(datos);
+
+        $('#Tbl_SolicitudRepuesto tbody tr').each(function () {
+            var Fecha = $(this).find('td').eq(0).text();
+            var idCodRepuesto = $(this).find('td').eq(1).text();
+            var Cantidad = $(this).find('td').eq(4).text();
+            var idMaquina = $(this).find('td').eq(5).text();
+
+            fila = { 'Fecha': Fecha, 'idCodRepuesto': idCodRepuesto, 'Cantidad': Cantidad, 'idMaquina': idMaquina };
+            datos.push(fila);
+        });
+
+        if (datos.length > 0) {
+            $.post('back/repuesto_solicitud.php', { datos }, function (respuesta) {
+                if (respuesta != 'NoConex') {
+                    if (respuesta) {
+                        LimpiarCampos();
+                        Tbl_SolicitudRepuesto.fnClearTable();
+                        mensaje('top', 1600, 'success', 'Datos Guardados')
+                    } else {
+                        mensaje('top', 1500, 'error', 'Datos no guardados')
+                    }
+                } else {
+                    msgErrorConexion()
+                }
+            });
+        } else {
+            $('#codRepuesto').focus();
+            mensaje('top', 1600, 'error', 'No hay datos para guardar')
+        }
+    } else {
+        mensaje('top', 1600, 'info', 'No hay datos para guardar')
+    }
+});
+
+$('#btnModalRegistroRepuesto').click(function (e) {
+    e.preventDefault();
+    $('#ModalRepuestos').modal('hide');
+});
+
+$(document).on('click', '#btnRegistroRepuesto', function (e) {
+    e.preventDefault();
     var datos = new Array();
+    var codRepuesto = $("#modalcodRepuesto").val();
+    var Descripcion = $("#modalDescripcion").val();
+    var Medida = $("#modalselectMedida").val();
+    const op = 'registroRepuesto';
 
-    $('#Tbl_SolicitudRepuesto tbody tr').each(function () {
-        var Fecha = $(this).find('td').eq(0).text();
-        var idCodRepuesto = $(this).find('td').eq(1).text();
-        var Cantidad = $(this).find('td').eq(4).text();
-        var idMaquina = $(this).find('td').eq(5).text();
+    var fila = { 'op': op, 'codRepuesto': codRepuesto, 'Descripcion': Descripcion, 'Medida': Medida };
+    datos.push(fila);
 
-        var fila = new Array(Fecha, idCodRepuesto, Cantidad, idMaquina);
-        datos.push(fila);
-    });
-
-    if (!validaInputs(datos[0])) {
-        $.post('back/repuesto_solicitud.php', { datos }, function (respuesta) {
+    if (!validaArrayAsociativo(datos)) {
+        $.post('back/repuesto_ingreso.php', { datos }, function (respuesta) {
             if (respuesta != 'NoConex') {
                 if (respuesta) {
                     LimpiarCampos();
-                    Tbl_SolicitudRepuesto.fnClearTable();
                     mensaje('top', 1600, 'success', 'Datos Guardados')
+
+                    $('#ModalRegistroRepuesto').modal('hide');
+                    $('#tblModalRepuestos').load('tables/Tbl_ModalRepuestos.php');
+                    $('#ModalRepuestos').modal('show');
                 } else {
                     mensaje('top', 1500, 'error', 'Datos no guardados')
                 }
@@ -170,7 +214,7 @@ $(document).on('click', '#btnGuardarSolicitudRepuesto', function (e) {
             }
         });
     } else {
-        $('#codRepuesto').focus();
+        $('#modalcodRepuesto').focus();
         Swal.fire({
             position: 'center',
             icon: 'error',
@@ -192,9 +236,12 @@ function OcultaCeldas() {
 function LimpiarCampos() {
     $("#idCodRepuesto").val('');
     $("#codRepuesto").val('');
-    $("#CodRepuesto").val('');
     $("#Descripcion").val('');
     $("#Cantidad").val('');
     $("#idMaquina").val('');
     $("#Maquina").val('');
+
+    $("#modalcodRepuesto").val('');
+    $("#modalDescripcion").val('');
+    $("#modalselectMedida").val('0')
 }

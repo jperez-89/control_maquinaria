@@ -26,6 +26,131 @@ Tbl_RegistroRepuesto = $('#Tbl_RegistroRepuesto').dataTable({
      }
 });
 
+$(document).on('click', '#BtnBuscarnSolicitud', function (e) {
+     e.preventDefault();
+     if ($("#nSolicitud").val() != "") {
+          const datos = new Array();
+          const op = 'BuscarnSolicitud';
+          var idSolicitud = $("#nSolicitud").val();
+
+          iniciarArray(datos);
+          fila = { 'op': op, 'idSolicitud': idSolicitud };
+          datos.push(fila);
+
+          if (!validaInputs(datos)) {
+               $.post('back/repuesto_ingreso.php', { datos }, function (respuesta) {
+                    if (respuesta != 'NoConex') {
+                         const data = JSON.parse(respuesta);
+
+                         if (data.length > 0) {
+                              Tbl_RegistroRepuesto.fnClearTable();
+                              for (let i = 0; i < data.length; i++) {
+                                   Tbl_RegistroRepuesto.fnAddData([
+                                        data[i][0], data[i][1], data[i][2], data[i][3], data[i][4], data[i][5], data[i][6], (data[i][7] == 1 ? 'Comprado' : 'No comprado'), `<input id="nComprobante" type="text" class="form-control" placeholder="Comprobante">`,
+                                        `<input id="chkRegistro" type="checkbox" class="custom-checkbox"> Marcar ingreso`,
+                                        idSolicitud
+                                   ]);
+                              }
+                              OcultaCeldas();
+                              LimpiarCampos();
+                         } else {
+                              $("#nSolicitud").focus();
+                              Tbl_RegistroRepuesto.fnClearTable();
+                              mensaje('top', 1500, 'info', 'Número de solicitud no existe')
+                         }
+                    } else {
+                         msgErrorConexion()
+                    }
+               });
+          } else {
+               $('#nSolicitud').focus();
+               Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    text: 'Complete todos los campos',
+                    showConfirmButton: true,
+               });
+          }
+     } else {
+          $('#nSolicitud').focus();
+          Swal.fire({
+               icon: 'info',
+               text: 'Debe digitar el número de solicitud',
+               showConfirmButton: true,
+          });
+     }
+});
+
+$(document).on('click', '#btnGuardarRegistroRepuesto', function (e) {
+     e.preventDefault()
+     if (Tbl_RegistroRepuesto.fnGetData().length > 0) {
+          var datos = new Array();
+          iniciarArray(datos);
+          const op = 'ingresoRepuesto';
+
+          $('#Tbl_RegistroRepuesto tbody tr').each(function () {
+               const check = $(this).find('td').eq(9)[0].children[0].checked;
+
+               if (check) {
+                    const idMaquina = $(this).find('td').eq(0).text()
+                    const idRepuesto = $(this).find('td').eq(2).text()
+                    const codRepuesto = $(this).find('td').eq(3).text()
+                    const Descripcion = $(this).find('td').eq(4).text()
+                    const Cantidad = $(this).find('td').eq(5).text()
+                    const Medida = $(this).find('td').eq(6).text()
+                    const nComprobante = $(this).find('td').eq(8)[0].children[0].value
+                    const idSolicitud = $(this).find('td').eq(10).text()
+
+                    fila = { 'op': op, 'idSolicitud': idSolicitud, 'idRepuesto': idRepuesto, 'codRepuesto': codRepuesto, 'Descripcion': Descripcion, 'idMaquina': idMaquina, 'Cantidad': Cantidad, 'Medida': Medida, 'nComprobante': nComprobante };
+                    datos.push(fila);
+               }
+          });
+
+          if (datos.length > 0) {
+               $.post('back/repuesto_ingreso.php', { datos }, function (respuesta) {
+                    if (respuesta != 'NoConex') {
+                         if (respuesta) {
+                              LimpiarCampos();
+                              Tbl_RegistroRepuesto.fnClearTable();
+                              mensaje('top', 1600, 'success', 'Datos Guardados')
+                         } else {
+                              mensaje('top', 1500, 'error', 'Datos no guardados')
+                         }
+                    } else {
+                         msgErrorConexion()
+                    }
+               });
+          } else {
+               mensaje('top', 1600, 'error', 'Debe marcar los datos a guardar');
+               return false;
+          }
+     } else {
+          $("#nSolicitud").focus()
+          mensaje('top', 1600, 'info', 'No hay datos para guardar')
+     }
+});
+
+$(document).on('click', '#btnCancelarRegistroRepuesto', function (e) {
+     e.preventDefault();
+     LimpiarCampos();
+     Tbl_RegistroRepuesto.fnClearTable();
+});
+
+function LimpiarCampos() {
+     $("#nSolicitud").val('');
+}
+
+function OcultaCeldas() {
+     $("#Tbl_RegistroRepuesto tr").each(function () {
+          var crow = $(this);
+          crow.find("td:eq(0)").css("display", "none");
+          crow.find("td:eq(2)").css("display", "none");
+          crow.find("td:eq(10)").css("display", "none");
+     });
+}
+
+
+
 $('#BtnModalRepuesto').click(function (e) {
      e.preventDefault();
      $('#tblModalRepuestos').load('tables/Tbl_ModalRepuestos.php');
@@ -127,53 +252,6 @@ $(document).on('click', '#BtnActualizarLinea', function (e) {
      $('#BtnAgregarLinea').removeClass('d-none');
 });
 
-$(document).on('click', '#btnGuardarRegistroRepuesto', function (e) {
-     var datos = new Array();
-
-     $('#Tbl_RegistroRepuesto tbody tr').each(function () {
-          var Fecha = $(this).find('td').eq(0).text();
-          // var idCodRepuesto = $(this).find('td').eq(1).text();
-          var codRepuesto = $(this).find('td').eq(2).text();
-          var Descripcion = $(this).find('td').eq(3).text();
-          var Cantidad = $(this).find('td').eq(4).text();
-          var Medida = $(this).find('td').eq(5).text();
-          var Comprobante = $(this).find('td').eq(6).text();
-
-          fila = new Array(Fecha, codRepuesto, Descripcion, Cantidad, Medida, Comprobante);
-          datos.push(fila);
-     });
-
-     if (!validaInputs(datos[0])) {
-          $.post('back/repuesto_ingreso.php', { datos }, function (respuesta) {
-               if (respuesta != 'NoConex') {
-                    if (respuesta) {
-                         LimpiarCampos();
-                         Tbl_RegistroRepuesto.fnClearTable();
-                         mensaje('top', 1600, 'success', 'Datos Guardados')
-                    } else {
-                         mensaje('top', 1500, 'error', 'Datos no guardados')
-                    }
-               } else {
-                    msgErrorConexion()
-               }
-          });
-     } else {
-          Swal.fire({
-               position: 'center',
-               icon: 'error',
-               title: 'Por favor',
-               text: 'Complete todos los campos',
-               showConfirmButton: true,
-          });
-     }
-});
-
-$(document).on('click', '#btnCancelarRegistroRepuesto', function (e) {
-     e.preventDefault();
-     LimpiarCampos();
-     Tbl_RegistroRepuesto.fnClearTable();
-});
-
 $(document).on('change', '#selectMedida', function (e) {
      e.preventDefault();
      Medida = $(this).val();
@@ -190,19 +268,3 @@ $(document).on('click', '#BtnAgregarRepuesto', function (e) {
      $("#txtDescripcion").val(FilaModalRepuestos[2]);
      $('#Tbl_ModalRepSalidas').load('Tablas/Tbl_ModalRepSalidas.php');
 });
-
-function LimpiarCampos() {
-     $("#idCodRepuesto").val('0');
-     $("#codRepuesto").val('');
-     $("#Descripcion").val('');
-     $("#Cantidad").val('');
-     $("#selectMedida").val('0');
-     $("#Comprobante").val('');
-}
-
-function OcultaCeldas() {
-     $("#Tbl_RegistroRepuesto tr").each(function () {
-          var crow = $(this);
-          crow.find("td:eq(1)").css("display", "none");
-     });
-}

@@ -103,7 +103,7 @@
 
     <!-- MODAL REPUESTOS -->
     <div id="ModalRepuestos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Lista de Repuestos</h3>
@@ -118,7 +118,8 @@
                     <br>
                 </div>
                 <div class="modal-footer">
-                    <a class="ui button blue" href="repuestos_ingresos.php">Registar Repuesto</a>
+                    <!-- <a class="ui button blue" href="repuestos_ingresos.php">Registar Repuesto</a> -->
+                    <a id="btnModalRegistroRepuesto" data-target="#ModalRegistroRepuesto" data-toggle="modal" class="ui button blue" href="#">Registar Repuesto</a>
                     <button type="button" class="ui button yellow" data-dismiss="modal" aria-label="Close">Cerrar</button>
                 </div>
             </div>
@@ -129,7 +130,7 @@
 
     <!-- MODAL MAQUINARIA -->
     <div id="ModalMaquinaria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Lista de Maquinaria</h3>
@@ -151,6 +152,56 @@
     </div>
     <!-- FIN MODAL MAQUINARIA -->
 
+    <!-- MODAL REGISTRO REPUESTOS -->
+    <div id="ModalRegistroRepuesto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="myModalLabel">Registro de Repuesto</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <section class='pt-2'>
+                        <div class="row">
+                            <div class='col-md-3'>
+                                <label>Código Repuesto</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control validar" ID="modalcodRepuesto" PlaceHolder="Código" name='modalcodRepuesto'>
+                                </div>
+                            </div>
+
+                            <div class='col-md-6'>
+                                <label>Descripción</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control validar" ID="modalDescripcion" PlaceHolder="Descripción" name='modalDescripcion'>
+                                </div>
+                            </div>
+
+                            <div class='col-md-3'>
+                                <label>Medida</label>
+                                <div class="input-group">
+                                    <select id="modalselectMedida" name="modalselectMedida" class="form-control custom-select">
+                                        <option value="0" selected>Seleccione una opción</option>
+                                        <option value="UNIDAD">UNIDAD</option>
+                                        <option value="MTS">METRO</option>
+                                        <option value="KG">KILO</option>
+                                        <option value="LITRO">LITRO</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ui button yellow" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                    <a id="btnRegistroRepuesto" class="ui button blue" href="#">Guardar</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- FIN MODAL REGISTRO REPUESTOS -->
+
 </div>
 <!-- FIN PONER PAGINAS AQUI -->
 
@@ -160,5 +211,7 @@ include_once("includes/footer.inc");
 ?>
 
 <script src="js/Repuestos_Solicitud.js"></script>
+
+</body>
 
 </html>

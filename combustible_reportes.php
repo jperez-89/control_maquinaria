@@ -203,4 +203,6 @@ include_once("includes/footer.inc");
 
 <script src="js/ReporteTablaGeneral.js"></script>
 
+</body>
+
 </html>

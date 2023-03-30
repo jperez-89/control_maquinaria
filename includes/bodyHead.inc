@@ -53,6 +53,7 @@
         <div id="collapseBodega" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="repuestos_solicitud.php">Solicitud de Repuestos</a>
+            <a class="collapse-item" href="repuestos_versolicitudes.php">Ver Solicitudes</a>
             <a class="collapse-item" href="repuestos_ingresos.php">Registro de Repuestos</a>
             <a class="collapse-item" href="repuestos_salidas.php">Salida de Repuestos</a>
             <a class="collapse-item" href="repuestos_reportes.php">Reportes</a>

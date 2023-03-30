@@ -54,11 +54,7 @@
 
                if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                         if ($row['Estado']) {
-                              $btn1 = '<button id="BtnAgregarMaquina" data-dismiss="modal" title="Agregar" class="btn btn-warning btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
-                         } else {
-                              $btn1 = '<button disabled id="BtnAgregarMaquina" data-dismiss="modal" title="Agregar" class="btn btn-primary btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
-                         }
+                         $btn1 = '<button id="BtnAgregarMaquina" data-dismiss="modal" title="Agregar" class="btn btn-warning btn-agregar"> <i class="fa fa-plus-circle"></i> </button>&nbsp';
           ?>
                          <tr>
                               <td><?php echo $btn1; ?></td>

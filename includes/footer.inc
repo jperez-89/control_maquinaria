@@ -21,14 +21,8 @@
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
     <script src="vendor/datatables/jquery.dataTables.min.js"></script> 
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
     <script src="vendor/SweetAlert/sweetalert2.min.js"></script>
-
-    <script src="vendor/semantic/semantic.min.js"></script>
-
     <script src="js/sb-admin-2.min.js"></script> 
-
     <script src="js/utils.js"></script> 
