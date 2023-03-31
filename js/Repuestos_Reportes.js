@@ -32,53 +32,89 @@ function setTable(table) {
      });
 };
 
-// $(document).ready(function () {
-//      $('#Tbl_Reporte_Compra').dataTable({
-//           retrieve: true,
-//           language: {
-//                "sLengthMenu": "Mostrar _MENU_ registros",
-//                "sSearch": "Buscar:",
-//                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-//                "sEmptyTable": "No hay datos en esta tabla",
-//                "oPaginate": {
-//                     "sFirst": "Primero",
-//                     "sLast": "Ultimo",
-//                     "sNext": "Siguiente",
-//                     "sPrevious": "Anterior",
-//                }
-//           }
-//      });
+$('#chkIngresos').click(function (e) {
+     if ($('#chkIngresos').is(':checked')) {
+          $('#chkSalidas').attr('disabled', 'true');
+     } else {
+          $('#chkSalidas').removeAttr('disabled');
+     }
+});
 
-//      $('#Tbl_Reporte_Salidas').dataTable({
-//           retrieve: true,
-//           language: {
-//                "sLengthMenu": "Mostrar _MENU_ registros",
-//                "sSearch": "Buscar:",
-//                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-//                "sEmpyTable": "No hay datos en esta tabla",
-//                "oPaginate": {
-//                     "sFirst": "Primero",
-//                     "sLast": "Ultimo",
-//                     "sNext": "Siguiente",
-//                     "sPrevious": "Anterior",
-//                }
-//           }
-//      });
+$('#chkSalidas').click(function (e) {
+     if ($('#chkSalidas').is(':checked')) {
+          $('#chkIngresos').attr('disabled', 'true');
+     } else {
+          $('#chkIngresos').removeAttr('disabled');
+     }
+});
 
-//      $('#Tbl_Reporte_Inventario').dataTable({
-//           retrieve: true,
-//           language: {
-//                "sLengthMenu": "Mostrar _MENU_ registros",
-//                "sSearch": "Buscar:",
-//                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-//                "sEmpyTable": "No hay datos en esta tabla",
-//                "oPaginate": {
-//                     "sFirst": "Primero",
-//                     "sLast": "Ultimo",
-//                     "sNext": "Siguiente",
-//                     "sPrevious": "Anterior",
-//                }
-//           }
-//      });
+$('#BtnBuscarReporte').click(function (e) {
+     e.preventDefault();
+     const chkIngresos = $('#chkIngresos').is(':checked');
+     const chkSalidas = $('#chkSalidas').is(':checked');
+     const FechaInicio = $('#FechaInicio').val();
+     const FechaFin = $('#FechaFin').val();
+     const datos = new Array();
 
-// });
+     if (FechaInicio != '' && FechaFin != '') {
+          if (chkIngresos) {
+               const op = 'Ingresos'
+               datos.push(op, FechaInicio, FechaFin);
+
+               $.post('back/repuesto_reportes.php', { datos }, function (res) {
+                    if (res != 'NoConex') {
+                         const respuesta = JSON.parse(res);
+
+                         if (respuesta != 0) {
+                              $(".divReporte").append($('<div id="Reporte"></div>'));
+                              $("#Reporte").html(respuesta.table);
+                              setTable('tblIngresos');
+                              $('#BtnCancelar').removeClass('d-none');
+                         } else {
+                              mensaje('top', 1600, 'info', 'No hay datos para ese rango de fechas')
+                         }
+                    } else {
+                         msgErrorConexion()
+                    }
+               });
+          } else if (chkSalidas) {
+               const op = 'Salidas'
+               datos.push(op, FechaInicio, FechaFin);
+
+               $.post('back/repuesto_reportes.php', { datos }, function (res) {
+                    if (res != 'NoConex') {
+                         const respuesta = JSON.parse(res);
+
+                         if (respuesta != 0) {
+                              $(".divReporte").append($('<div id="Reporte"></div>'));
+                              $("#Reporte").html(respuesta.table);
+                              setTable('tblSalidas');
+                              $('#BtnCancelar').removeClass('d-none');
+                         } else {
+                              mensaje('top', 1600, 'info', 'No hay datos para ese rango de fechas')
+                         }
+                    } else {
+                         msgErrorConexion()
+                    }
+               });
+          } else {
+               mensaje('top', 1600, 'info', 'Debes seleccionar el tipo de reporte')
+          }
+     } else {
+          mensaje('top', 1600, 'info', 'Elige las fechas correspondientes')
+     }
+});
+
+$('#BtnCancelar').click(function (e) {
+     $('#chkSalidas').removeAttr('disabled');
+     $('#chkIngresos').removeAttr('disabled');
+
+     $("#chkIngresos").prop('checked', false);
+     $("#chkSalidas").prop('checked', false);
+
+     $('#FechaInicio').val('');
+     $('#FechaFin').val('');
+
+     $("#Reporte").remove();
+     $('#BtnCancelar').addClass('d-none');
+});

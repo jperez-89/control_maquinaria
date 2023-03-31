@@ -183,6 +183,52 @@
                </div>
           </div>
      </div>
+
+     <!-- INGRESOS Y SALIDAS POR RANGO FECHAS -->
+     <div class="card shadow mb-1">
+          <a href="#" class="d-block card-header py-3">
+               <h6 class="m-0 font-weight-bold text-gray-800">Reporte ingresos o salidas por rango de fechas</h6>
+          </a>
+          <div class="card-body">
+               <div class='row mb-4'>
+                    <div class="col-md-1">
+                         <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="chkIngresos" required>
+                              <label class="custom-control-label" for="chkIngresos">Ingresos</label>
+                         </div>
+                    </div>
+                    <div class="col-md-1">
+                         <div class="custom-control custom-switch">
+                              <input type="checkbox" class="custom-control-input" id="chkSalidas" required>
+                              <label class="custom-control-label" for="chkSalidas">Salidas</label>
+                         </div>
+                    </div>
+                    <div class="col-md-2">
+                         <div class="input-group">
+                              <div class="input-group-prepend">
+                                   <span class="input-group-text">Fecha inicio</span>
+                              </div>
+                              <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control" ID="FechaInicio" name='FechaInicio' required>
+                         </div>
+                    </div>
+                    <div class="col-md-2">
+                         <div class="input-group">
+                              <div class="input-group-prepend">
+                                   <span class="input-group-text">Fecha fin</span>
+                              </div>
+                              <input type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" class="form-control" ID="FechaFin" name='FechaFin' required>
+                         </div>
+                    </div>
+
+                    <div class="col-md-2">
+                         <button id="BtnBuscarReporte" class="ui button yellow">Buscar</button>
+                         <button id="BtnCancelar" class="ui button red d-none">Cancelar</button>
+                    </div>
+               </div>
+               <div class="divReporte">
+               </div>
+          </div>
+     </div>
 </div>
 <!-- FIN PONER PAGINAS AQUI -->
 
