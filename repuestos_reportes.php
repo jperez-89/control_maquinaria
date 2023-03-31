@@ -28,7 +28,7 @@
           <a href="#CardReporteIngresoRepuestos" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="CardReporteIngresoRepuestos">
                <h6 class="m-0 font-weight-bold text-gray-800">Reporte Ingreso de Repuestos</h6>
           </a>
-          <div class="collapse" id="CardReporteIngresoRepuestos" style="">
+          <div class="collapse" id="CardReporteIngresoRepuestos">
                <div class="table-responsive">
                     <div class="card shadow">
                          <div class="card-body">
