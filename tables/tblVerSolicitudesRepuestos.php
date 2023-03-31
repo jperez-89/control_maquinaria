@@ -1,6 +1,9 @@
 <script>
      var Tbl_VerSolicitudesRepuestos = $('#Tbl_VerSolicitudesRepuestos').dataTable({
           retrieve: true,
+          order: [
+               [2, "desc"]
+          ],
           "language": {
                "sProcessing": "Procesando...",
                "sLengthMenu": "Mostrar _MENU_ registros",

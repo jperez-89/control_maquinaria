@@ -1,12 +1,3 @@
-var tabla = $('#tblInsumos').dataTable({
-    retrieve: true,
-    paging: false,
-    searching: false,
-    language: {
-        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros"
-    }
-});
-
 $('#BtnModalMaquinaria').click(function (e) {
     e.preventDefault();
     $('#ModalMaq').load('tables/Tbl_ModalMaquinaria.php');
@@ -79,7 +70,7 @@ $(document).on('click', '#BtnGuardarInsumo', function (e) {
                                     mensaje('top', 1600, 'success', 'Datos Guardados')
                                     $('#Tbl_insumoComb').load('tables/tblCombustible_insumos.php');
                                 } else {
-                                    mensaje('top', 1500, 'error', 'Datos no guardados')
+                                    mensaje('top', 1600, 'error', 'Datos no guardados')
                                 }
                             } else {
                                 msgErrorConexion()
@@ -90,7 +81,7 @@ $(document).on('click', '#BtnGuardarInsumo', function (e) {
                     }
                 } else {
                     $("#BoletaComb").focus();
-                    mensaje('top', 1500, 'error', 'Boleta no tiene saldo suficiente');
+                    mensaje('top', 1600, 'error', 'Boleta no tiene saldo suficiente');
                 }
             } else {
                 msgErrorConexion();

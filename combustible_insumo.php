@@ -85,7 +85,7 @@
 
     <!-- MODAL MAQUINARIA -->
     <div id="ModalMaquinaria" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Lista de Maquinaria</h3>
@@ -109,7 +109,7 @@
 
     <!-- MODAL DESPACHADOR -->
     <div id="ModalDespachador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Lista de Despachadores</h3>
@@ -133,7 +133,7 @@
 
     <!-- MODAL BOLETA COMBUSTIBLE -->
     <div id="ModalBoletaCombustible" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="myModalLabel">Lista de Ingresos de Combustible</h3>

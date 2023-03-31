@@ -1,6 +1,9 @@
 <script>
     $('#Tbl_CombustibleInsumos').dataTable({
         retrieve: true,
+        order: [
+            [1, "desc"]
+        ],
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",

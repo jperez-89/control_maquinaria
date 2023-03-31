@@ -1,13 +1,11 @@
 <?php
-// INSERTA LA INFORMACION EN LA TABLA REPUESTOS
 include_once('../includes/conexion.inc');
-// VALIDA SI SE HIZO BIEN LA CONEXION CON LA BASE DE DATOS
 if (!$conex) {
     $repuesta = 'NoConex';
 } else {
     $datos = $_REQUEST['datos'];
     $op = $datos[0];
-    $repuesta = false;
+    $repuesta = 0;
 
     switch ($op) {
         case 'insertar':
@@ -18,6 +16,7 @@ if (!$conex) {
             $idBoletaComb = trim($datos[5]);
             $idDespachador = trim($datos[6]);
 
+
             $query = "INSERT INTO combustible_insumo (fecha, BoletaDesp, idMaquina, cantidadlts, idBoletaComb, idDespachador) VALUES ('$fecha', '$BoletaDesp', $idMaquina, $cantidadlts, $idBoletaComb, $idDespachador)";
 
             if (mysqli_query($conex, $query)) {
@@ -26,7 +25,16 @@ if (!$conex) {
                 $query = "UPDATE combustible_inventario SET saldolts = saldolts - $cantidadlts WHERE idCombustible = $idBoletaComb";
 
                 if (mysqli_query($conex, $query)) {
-                    $repuesta = true;
+                    $query = "SELECT saldolts FROM combustible_inventario WHERE idCombustible = " . $idBoletaComb;
+                    $response = mysqli_fetch_assoc(mysqli_query($conex, $query));
+
+                    if ($response['saldolts'] == 0) {
+                        $query = "UPDATE combustible SET estado = 0 WHERE id = " . $idBoletaComb;
+
+                        if (mysqli_query($conex, $query)) {
+                            $respuesta = 1;
+                        }
+                    }
                 }
             }
             break;
