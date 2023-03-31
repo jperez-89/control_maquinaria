@@ -128,7 +128,28 @@ include_once("includes/bodyHead.inc");
                                                   </div>
                                              </div>
                                         </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
 
+          <div class="col-xl-3 col-md-6 mb-4">
+               <div class="card shadow h-100 py-2">
+                    <div class="card-body">
+                         <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                   <div class="card-body">
+                                        <div class="mb-3">
+                                             <label for="existenciaRepuesto" class="form-label">Consúlte el stock de un repuesto</label>
+                                             <div class="input-group">
+                                                  <input type="text" class="form-control" id="existenciaRepuesto" name="existenciaRepuesto" placeholder="Nombre o código" required="required">
+                                                  <div class="input-group-append">
+                                                       <span id="btnRevisarExistenciaRepuesto" class="input-group-text bg-warning"><a href="#"><i class="fas fa-search text-white"></i></a></span>
+                                                  </div>
+                                             </div>
+                                        </div>
                                    </div>
                               </div>
                          </div>

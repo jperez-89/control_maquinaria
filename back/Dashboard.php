@@ -87,6 +87,48 @@ if (!$conex) {
                 $repuesta = 0;
             }
             break;
+
+        case 'existenciaRepuesto':
+            $table['table'] = '<div class="card shadow-lg mt-2">
+                            <div class="card-body">
+                                <div class="table-responsiv-lg">
+                                    <table id="tblexistenciaRepuesto" class="table table-hover table-sm w-100">
+                                        <thead>
+                                            <tr>
+                                                <th><label>Código Repuesto</label></th>
+                                                <th><label>Descripcion</label></th>
+                                                <th><label>Cantidad</label></th>
+                                                <th><label>Medida</label></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>';
+
+            $query = "SELECT r.Codigo, r.Descripcion, ri.Cantidad, r.Medida FROM repuesto_inventario AS ri INNER JOIN repuesto AS r on r.Codigo = ri.Codigo WHERE r.Codigo LIKE '%" . $datos[1] . "%' OR r.Descripcion LIKE '%" . $datos[1] . "%' GROUP BY r.Codigo;";
+
+
+            $datos = mysqli_query($conex, $query);
+
+            if (mysqli_num_rows($datos) > 0) {
+                while ($linea = mysqli_fetch_assoc($datos)) {
+                    $table['fecha'] = $linea['fecha'];
+                    $table['table'] .= "<tr>";
+                    $table['table'] .= "<td>" . $linea['Codigo'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['Descripcion'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['Cantidad'] . "</td>";
+                    $table['table'] .= "<td>" . $linea['Medida'] . "</td>";
+                    $table['table'] .= "</tr>";
+                }
+
+                $table['table'] .= "</table>
+                    </div>
+                    </div>
+                    </div>";
+
+                $repuesta = json_encode($table, JSON_UNESCAPED_UNICODE);
+            } else {
+                $repuesta = 0;
+            }
+            break;
     }
 
     mysqli_close($conex);

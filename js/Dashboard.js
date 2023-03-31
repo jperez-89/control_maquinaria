@@ -158,9 +158,40 @@ $('#btnRevisarSolicitud').click(function (e) {
     }
 });
 
+$('#btnRevisarExistenciaRepuesto').click(function (e) {
+    e.preventDefault();
+    if ($('#existenciaRepuesto').val() != "") {
+        var datos = new Array();
+        let op = 'existenciaRepuesto';
+        let existenciaRepuesto = $('#existenciaRepuesto').val();
+        datos.push(op, existenciaRepuesto);
+
+        $.post('back/Dashboard.php', { datos }, function (res) {
+            if (res != 'NoConex') {
+                const respuesta = JSON.parse(res);
+
+                if (respuesta) {
+                    $("#BodyModal").html(respuesta.table);
+                    $("#myModalLabel").html(`Stock de repuestos`);
+                    $('#Modal').modal('show');
+                } else {
+                    $('#existenciaRepuesto').focus()
+                    mensaje('top', 1500, 'info', 'Número de solicitud no existe')
+                }
+            } else {
+                msgErrorConexion()
+            }
+        });
+    } else {
+        $('#existenciaRepuesto').focus()
+        mensaje('top', 1500, 'error', 'Ingrese nombre o código del repuestso')
+    }
+});
+
 $('#Modal').on('hide.bs.modal', function (e) {
     $('#codMaquina').val('');
     $('#seguimientoSolicitud').val('');
+    $('#existenciaRepuesto').val('');
     $("#BodyModal").html('');
     $("#myModalLabel").html('');
 });
