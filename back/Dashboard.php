@@ -5,41 +5,41 @@ if (!$conex) {
 } else {
     $datos = $_REQUEST['datos'];
     $op = $datos[0];
-    $repuesta = false;
+    $respuesta = false;
 
 
     switch ($op) {
         case 'ingresoMensualCombustible':
             $query = "SELECT SUM(cantidadlts) AS ingresoMensualCombustible FROM `combustible` WHERE fecha BETWEEN FIRST_DAY(NOW()) AND LAST_DAY(NOW());";
             $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
-            $repuesta = $datos['ingresoMensualCombustible'];
+            $respuesta = $datos['ingresoMensualCombustible'];
 
             break;
 
         case 'consumoMensualCombustible':
             $query = "SELECT SUM(cantidadlts) AS consumoMensualCombustible FROM `combustible_insumo` WHERE fecha BETWEEN FIRST_DAY(NOW()) AND LAST_DAY(NOW());";
             $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
-            $repuesta = $datos['consumoMensualCombustible'];
+            $respuesta = $datos['consumoMensualCombustible'];
 
             break;
 
         case 'MaquinariaDisponible':
             $query = "SELECT ROUND((((SELECT COUNT(Id) FROM maquinaria WHERE Estado = 1) / (SELECT COUNT(Id) FROM maquinaria)) * 100), 0) AS MaquinariaDisponible;";
             $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
-            $repuesta = $datos['MaquinariaDisponible'];
+            $respuesta = $datos['MaquinariaDisponible'];
 
             break;
 
         case 'SoliRepuestoPendiente':
             $query = "SELECT COUNT(id) AS SoliRepuestoPendiente FROM `repuesto_solicitud` WHERE estado = 0;";
             $datos = mysqli_fetch_assoc(mysqli_query($conex, $query));
-            $repuesta = $datos['SoliRepuestoPendiente'];
+            $respuesta = $datos['SoliRepuestoPendiente'];
 
             break;
 
         case 'RevisarMaquina':
             $query = "SELECT * FROM `maquinaria` WHERE Codigo = '$datos[1]';";
-            $repuesta = json_encode(mysqli_fetch_assoc(mysqli_query($conex, $query)), JSON_UNESCAPED_UNICODE);
+            $respuesta = json_encode(mysqli_fetch_assoc(mysqli_query($conex, $query)), JSON_UNESCAPED_UNICODE);
 
             break;
 
@@ -82,9 +82,9 @@ if (!$conex) {
                 </div>
                 </div>";
 
-                $repuesta = json_encode($table, JSON_UNESCAPED_UNICODE);
+                $respuesta = json_encode($table, JSON_UNESCAPED_UNICODE);
             } else {
-                $repuesta = 0;
+                $respuesta = 0;
             }
             break;
 
@@ -124,13 +124,17 @@ if (!$conex) {
                     </div>
                     </div>";
 
-                $repuesta = json_encode($table, JSON_UNESCAPED_UNICODE);
+                $respuesta = json_encode($table, JSON_UNESCAPED_UNICODE);
             } else {
-                $repuesta = 0;
+                $respuesta = 0;
             }
             break;
     }
 
+    if (is_null($respuesta)) {
+        $respuesta = 0;
+    }
+
     mysqli_close($conex);
-    echo $repuesta;
+    echo $respuesta;
 }
