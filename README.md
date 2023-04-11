@@ -2,22 +2,40 @@
 **Este proyecto utiliza la plantilla sb-admin-2, PHP, javascript, jquery, semantic y SweetAlert.**
 
 <!-- Login
-![Login](https://github.com/jperez-89/hsolis/blob/master/img/login.PNG?raw=true "Login")
+![Login]( "Login")
 
 Dashboard
-![Dashboard](https://github.com/jperez-89/hsolis/blob/master/img/dashboard.PNG?raw=true "Dashboard")
+![Dashboard]( "Dashboard")
 
 Registro de Maquinaria
-![Registro de Maquinaria](https://github.com/jperez-89/hsolis/blob/master/img/registro_maquinaria.PNG?raw=true "Registro de maquinaria")
+![Registro de Maquinaria]( "Registro de maquinaria")
 
-Ingreso de repuestos
-![Ingreso de repuestos](https://github.com/jperez-89/hsolis/blob/master/img/ingreso_repuestos.PNG?raw=true "Ingreso de repuestos")
+Registro de Despachadores
+![Registro de despachadores]( "Registro de despachadores")
 
-Salida de repuestos
-![Salida de repuestos](https://github.com/jperez-89/hsolis/blob/master/img/salida_repuestos.PNG?raw=true "Salida de repuestos")
+Ingreso de Combustible
+![Ingreso de Combustible]( "Ingreso de Combustible")
 
-Reportes
-![Reportes](https://github.com/jperez-89/hsolis/blob/master/img/reportes.PNG?raw=true "Reportes")
+Insumo de Combustible
+![Insumo de Combustible]( "Insumo de Combustible")
 
-Reporte inventario actual
-![Reporte inventario actual](https://github.com/jperez-89/hsolis/blob/master/img/reporte_inventario.PNG?raw=true "Reporte de inventario actual") -->
+Reportes de Combustible
+![Reportes de Combustible]( "Reportes de Combustible")
+
+Solicitud de Repuestos
+![Solicitud de repuestos]( "Solicitud de repuestos")
+
+Salida de Repuestos
+![Salida de repuestos]( "Salida de repuestos")
+
+Ver Solicitudes de Repuestos
+![Ver Solicitudes de repuestos]( "Ver Solicitudes de repuestos")
+
+Registro de Repuestos
+![Registro de Repuestos]( "Registro de Repuestos")
+
+Salida de Repuestos
+![Salida de Repuestos]( "Salida de Repuestos")
+
+Reportes de repuestos
+![Reportes de repuestos]( "Reportes de repuestos") -->
